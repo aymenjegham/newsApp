@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="2dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.google.android.material.chip.ChipGroup
+            android:id="@+id/categories_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:singleLine="false"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10dp">
+        <com.google.android.material.chip.Chip
+                android:id="@+id/business"
+                android:soundEffectsEnabled="true"
+                android:checkable="true"
+                android:text="@string/business"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+        <com.google.android.material.chip.Chip
+                android:id="@+id/sports"
+                android:checkable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sports"/>
+
+        <com.google.android.material.chip.Chip
+                android:id="@+id/general"
+                android:checkable="true"
+                android:text="@string/general"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+        <com.google.android.material.chip.Chip
+                android:id="@+id/health"
+                android:checkable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/health"/>
+        <com.google.android.material.chip.Chip
+                android:id="@+id/science"
+                android:checkable="true"
+                android:text="@string/science"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+        <com.google.android.material.chip.Chip
+                android:id="@+id/entertainment"
+                android:checkable="true"
+                android:text="@string/entertainment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+        <com.google.android.material.chip.Chip
+                android:id="@+id/technology"
+                android:text="@string/technology"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:checkable="true"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+
+
+</LinearLayout>

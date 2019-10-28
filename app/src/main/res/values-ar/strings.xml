@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">نيوز أب</string>
+    <string name="business">اعمال</string>
+    <string name="Feed">"الأخبار "</string>
+    <string name="country">بلد</string>
+    <string name="entertainment">ترفيه</string>
+    <string name="general">شامل</string>
+    <string name="health">صحة</string>
+    <string name="language">لغة</string>
+    <string name="science">علوم</string>
+    <string name="sports">رياضة</string>
+    <string name="technology">تكنولوجيا</string>
+    <string name="categories">التصنيفات</string>
+</resources>

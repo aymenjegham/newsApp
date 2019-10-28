@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+             android:title="Category"
+            android:summary="Select category"
+            android:layout="@layout/pref_layout"
+            android:layout_width="match_parent">
+        <Preference
+                android:defaultValue="sports"
+                android:key="@string/categories"
+                android:layout="@layout/chipgroup">
+        </Preference>
+
+        <Preference
+                android:title="Country"
+                android:summary="Select country"
+                android:layout="@layout/pref_layout">
+        </Preference>
+
+        <ListPreference
+                android:key="@string/country"
+                android:title="Countries"
+                android:entries="@array/country_labels"
+                android:entryValues="@array/country_values"
+                android:defaultValue="us"
+        />
+
+        <Preference
+                android:title="Language"
+                android:layout="@layout/pref_layout"
+                android:summary="Select language">
+
+        </Preference>
+
+            <ListPreference
+                    android:key="@string/language"
+                    android:title="Languages"
+                    android:defaultValue="gb"
+                    android:entryValues="@array/laguage_values"
+                    android:entries="@array/language_labels">
+            </ListPreference>
+
+
+
+
+        <Preference
+                android:title="Alarms"
+                android:textSize="20px"
+                android:layout="@layout/pref_layout">
+
+        </Preference>
+
+
+        <Preference
+                android:title="Theme"
+                android:layout="@layout/pref_layout">
+
+        </Preference>
+        <SwitchPreference
+                android:title="Night mode"
+                android:defaultValue="false"
+                android:summaryOn="Deactivate to select day mode"
+                android:summaryOff="Activate  to select night mode "
+                android:icon="@drawable/ic_moon"/>
+
+        <Preference
+                android:title="About"
+                android:layout="@layout/pref_layout"
+                app:initialExpandedChildrenCount="1">
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

@@ -1,0 +1,59 @@
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/appBarLayout">
+
+                    <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?colorPrimary"
+                            android:elevation="3dp"
+                            app:layout_scrollFlags="scroll|enterAlways"
+                            android:theme="@style/ToolbarTheme"/>
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                        android:id="@+id/mySwiperefresh"
+                        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent">
+
+                    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:shimmer_demo_child_count="10"
+                            app:shimmer_demo_layout="@layout/layout_demo_grid"
+                            app:shimmer_demo_layout_manager_type="linear_vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_marginTop="8dp">
+
+                    </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                        android:id="@+id/bottom_nav"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/colorWhite"
+                        android:elevation="3dp"
+                        android:layout_gravity="bottom"
+                        app:itemIconTint="@animator/navigation_item_text_color"
+                        app:itemTextColor="@animator/navigation_item_text_color"
+                        app:labelVisibilityMode="labeled"
+                        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+                        app:menu="@menu/bottom_nav"/>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
+

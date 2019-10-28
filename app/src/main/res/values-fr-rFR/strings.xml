@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="business">affaires</string>
+    <string name="Feed">Accueil</string>
+    <string name="country">pays</string>
+    <string name="entertainment">divertissement</string>
+    <string name="general">général</string>
+    <string name="health">santé</string>
+    <string name="language">langage</string>
+    <string name="science">science</string>
+    <string name="sports">sports</string>
+    <string name="technology">technologie</string>
+    <string name="categories">catégories</string>
+</resources>

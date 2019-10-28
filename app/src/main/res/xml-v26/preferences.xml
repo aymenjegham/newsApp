@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:title="Category"
+            android:summary="Select category"
+            android:layout="@layout/pref_layout"
+            android:layout_width="match_parent">
+        <Preference
+                android:layout="@layout/chipgroup">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="Country"
+            android:summary="Select country"
+            android:layout="@layout/pref_layout">
+        <ListPreference
+        android:icon="@drawable/nz"
+         android:title="nz">
+        </ListPreference>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="Language"
+            android:layout="@layout/pref_layout"
+            android:summary="Select language">
+        <ListPreference
+                android:icon="@drawable/fr"
+                android:title="Fr">
+
+        </ListPreference>
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="Alarms"
+            android:textSize="20px"
+            android:layout="@layout/pref_layout">
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="Theme"
+            android:layout="@layout/pref_layout">
+        <SwitchPreference
+                android:title="Night mode"
+                android:summary="Tap to select night mode "/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="About"
+            android:layout="@layout/pref_layout">
+    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen>
+

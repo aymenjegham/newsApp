@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="Naws_App" translatable="false">NewsApp</string>
+    <string name="Feed">Feed</string>
+    <string name="country">country</string>
+    <string name="language">language</string>
+    <string name="business">business</string>
+    <string name="sports">sports</string>
+    <string name="general">general</string>
+    <string name="health">health</string>
+    <string name="science">science</string>
+    <string name="entertainment">entertainment</string>
+    <string name="technology">technology</string>
+    <string name="categories">categories</string>
+
+</resources>
