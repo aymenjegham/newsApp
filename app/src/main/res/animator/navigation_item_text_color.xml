@@ -2,6 +2,6 @@
 <selector
         xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true"
-          android:color="@color/common_google_signin_btn_text_dark_focused" />
-    <item android:color="@android:color/darker_gray"  />
+          android:color="@color/colorGrey" />
+    <item android:color="@android:color/black"  />
 </selector>

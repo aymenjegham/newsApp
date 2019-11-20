@@ -1,13 +1,22 @@
 package com.angelstudio.newsapp.internal
 
-import android.content.Context
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.angelstudio.newsapp.R
 import com.angelstudio.newsapp.data.db.entity.Article
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.layout_demo_grid.view.*
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.FormatStyle
+import org.threeten.bp.LocalDateTime
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import kotlinx.android.synthetic.main.top_headline_item.view.*
 
 
 @BindingAdapter("title")
@@ -20,13 +29,14 @@ fun TextView.setTitle(item: Article?) {
 @BindingAdapter("content")
 fun TextView.setContent(item: Article?) {
     item?.let {
-        text = it.content
+        text = edit(it.content)
+
     }
 }
 
 @BindingAdapter("sourcename")
 fun TextView.setSourceName(item: Article?) {
-    item?.let {
+     item?.let {
         text = it.source.name
     }
 }
@@ -34,7 +44,22 @@ fun TextView.setSourceName(item: Article?) {
 @BindingAdapter("publishedAt")
 fun TextView.setPublishedAt(item: Article?) {
     item?.let {
-        text = it.publishedAt
+        val DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val ld = LocalDateTime.parse(it.publishedAt, DATEFORMATTER)
+        val tFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
+
+         text = ld.format(tFormatter)
+
+    }
+}
+
+@BindingAdapter("publishedAtDay")
+fun TextView.setPublishedAtDay(item: Article?) {
+    item?.let {
+        val DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val ld = LocalDateTime.parse(it.publishedAt, DATEFORMATTER)
+        val dtFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)
+        text = ld.format(dtFormatter)
     }
 }
 
@@ -50,16 +75,29 @@ fun TextView.setAuthor(item: Article?) {
 @BindingAdapter("urlToImage")
 fun ImageView.setImage(item: Article?) {
 
+    if(item?.source?.name.equals("Youtube.com")){
+        visibility=View.GONE
+    }else{
+        visibility=View.VISIBLE
+    }
+
     val requestOptions = com.bumptech.glide.request.RequestOptions()
-        .placeholder(R.drawable.ic_launcher_background)
-        .error(R.drawable.ic_launcher_background)
+        .placeholder(R.drawable.ic_icon_round)
+        .error(R.drawable.ic_icon_round)
 
     Glide.with(context)
         .applyDefaultRequestOptions(requestOptions)
         .load(item?.urlToImage)
         .into(this)
+}
 
-
+@BindingAdapter("urlvideo")
+fun YouTubePlayerView.loadVideo(item: Article?) {
+    visibility = if(item?.source?.name.equals("Youtube.com")){
+        View.VISIBLE
+    }else{
+        View.GONE
+    }
 
 }
 

@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="country_labels">
-        <item>Argentina</item>
-        <item> Australia</item>
-        <item>Austria</item>
-        <item>Belgium</item>
-        <item>Brazil</item>
-        <item>Bulgaria</item>
-        <item>Canada</item>
-        <item>China</item>
-        <item>Colombia</item>
-        <item>Cuba</item>
-        <item>Czech Republic</item>
-        <item>Egypt</item>
-        <item>France</item>
-        <item>Germany</item>
-        <item>Greece</item>
-        <item>Hong Kong</item>
-        <item>Hungary</item>
-        <item>India</item>
-        <item>Indonesia</item>
-        <item>Ireland</item>
-        <item>Israel</item>
-        <item>Italy</item>
-        <item>Japan</item>
-        <item>Latvia</item>
-        <item>Lithuania</item>
-        <item>Malaysia</item>
-        <item>Mexico</item>
-        <item>Morocco</item>
-        <item>Netherlands</item>
-        <item>New Zealand</item>
-        <item>Nigeria</item>
-        <item>Norway</item>
-        <item>Philippines</item>
-        <item>Poland</item>
-        <item>Portugal</item>
-        <item>Romania</item>
-        <item>Russia</item>
-        <item>Saudi Arabia</item>
-        <item>Serbia</item>
-        <item>Singapore</item>
-        <item>Slovakia</item>
-        <item>Slovenia</item>
-        <item>South Africa</item>
-        <item>South Korea</item>
-        <item>Sweden</item>
-        <item>Switzerland</item>
-        <item>Taiwan</item>
-        <item>Thailand</item>
-        <item>Turkey</item>
-        <item>UAE</item>
-        <item>Ukraine</item>
-        <item>United Kingdom</item>
-        <item>United States</item>
-        <item>Venezuela</item>
+        <item>@string/ar</item>
+        <item>@string/au</item>
+        <item>@string/at</item>
+        <item>@string/be</item>
+        <item>@string/br</item>
+        <item>@string/bg</item>
+        <item>@string/ca</item>
+        <item>@string/cn</item>
+        <item>@string/co</item>
+        <item>@string/cu</item>
+        <item>@string/cz</item>
+        <item>@string/eg</item>
+        <item>@string/fr</item>
+        <item>@string/de</item>
+        <item>@string/gr</item>
+        <item>@string/hk</item>
+        <item>@string/hu</item>
+        <item>@string/in</item>
+        <item>@string/id</item>
+        <item>@string/ie</item>
+        <item>@string/il</item>
+        <item>@string/it</item>
+        <item>@string/jp</item>
+        <item>@string/lv</item>
+        <item>@string/lt</item>
+        <item>@string/my</item>
+        <item>@string/mx</item>
+        <item>@string/ma</item>
+        <item>@string/nl</item>
+        <item>@string/nz</item>
+        <item>@string/ng</item>
+        <item>@string/no</item>
+        <item>@string/ph</item>
+        <item>@string/pl</item>
+        <item>@string/pt</item>
+        <item>@string/ro</item>
+        <item>@string/ru</item>
+        <item>@string/sa</item>
+        <item>@string/rs</item>
+        <item>@string/sg</item>
+        <item>@string/sk</item>
+        <item>@string/si</item>
+        <item>@string/za</item>
+        <item>@string/kr</item>
+        <item>@string/se</item>
+        <item>@string/ch</item>
+        <item>@string/tw</item>
+        <item>@string/th</item>
+        <item>@string/tr</item>
+        <item>@string/ae</item>
+        <item>@string/ua</item>
+        <item>@string/gb</item>
+        <item>@string/us</item>
+        <item>@string/ve</item>
 
 
     </string-array>
@@ -129,4 +129,6 @@
         <item>fr</item>
         <item>arab</item>
     </string-array>
+
+
 </resources>

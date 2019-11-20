@@ -22,89 +22,126 @@
                 android:onClick="@{() ->clickListener.onClick(article)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:autoPlay="false"
+                    app:urlvideo="@{article}"
+                    app:showFullScreenButton="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/guideline"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/headline_item_image"/>
             <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="0dp"
                     tools:srcCompat="@tools:sample/avatars[1]"
                     android:id="@+id/urlToImage"
+                    app:layout_constraintBottom_toTopOf="@id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:urlToImage="@{article}"
-            />
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/headline_item_image"/>
             <TextView
-                    android:text=""
+                    android:text="Vape is bad for your shitty life-get over it - Aymen Jegham"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/title"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/urlToImage"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
                     android:textStyle="bold"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:theme="@style/Preference.desc"
                     android:textSize="18sp"
                     app:title="@{article}"
             />
             <TextView
-                    android:text=""
+                    android:text="All studies in the world admits that ,you don't have to be so stubborn about it , just quit ....[+4521 chars] "
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/title"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
                     android:textAlignment="viewStart"
+                    android:theme="@style/Preference.desc"
                     app:content="@{article}"
-            />
-            <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    tools:srcCompat="@tools:sample/avatars[15]"
-                    android:id="@+id/sourceImg"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/publishedAt" android:layout_marginTop="8dp"/>
+
             <TextView
-                    android:text=""
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sourcename"
-                    app:layout_constraintStart_toEndOf="@+id/sourceImg"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/content"
-                    app:sourcename="@{article}"
-            />
-            <TextView
-                    android:text=""
-                    android:layout_width="wrap_content"
+                    android:text="2019-11-13T10:57:00Z"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/publishedAt"
-                    app:layout_constraintStart_toEndOf="@+id/sourcename"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/content"
-                    android:layout_marginStart="8dp"
                     app:publishedAt="@{article}"
-            />
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:theme="@style/datenauthor"
+                    android:gravity="start"
+                    android:textSize="12sp"/>
             <TextView
-                    android:text=""
-                    android:layout_width="wrap_content"
+                    android:text="jjhfdhfhf"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/author"
-                    app:layout_constraintTop_toBottomOf="@+id/sourceImg"
+                    android:gravity="start"
+                    app:layout_constraintTop_toBottomOf="@+id/content"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:theme="@style/datenauthor"
                     app:author="@{article}"
-            />
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/imageView8"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/publishedAtDay"
+                    app:publishedAtDay="@{article}"
+                    app:layout_constraintStart_toEndOf="@+id/publishedAt"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="12sp"
+                    android:gravity="start"
+                    android:theme="@style/datenauthor"
+                    android:layout_marginStart="2dp"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_share"
+                    android:id="@+id/imageView7"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/content"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_save"
+                    android:id="@+id/imageView8"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/content"/>
+            <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content" android:id="@+id/guideline"
+                                                        app:layout_constraintGuide_begin="200dp"
+                                                        android:orientation="horizontal"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

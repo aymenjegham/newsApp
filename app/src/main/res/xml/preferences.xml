@@ -1,53 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
+
+<androidx.preference.PreferenceScreen
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:selectable="false"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory
-             android:title="Category"
-            android:summary="Select category"
-            android:layout="@layout/pref_layout"
-            android:layout_width="match_parent">
-        <Preference
-                android:defaultValue="sports"
-                android:key="@string/categories"
-                android:layout="@layout/chipgroup">
-        </Preference>
 
         <Preference
-                android:title="Country"
-                android:summary="Select country"
+                android:title="@string/categories"
+                android:summary="@string/Select_category"
+                app:allowDividerAbove="false"
+                app:allowDividerBelow="false"
+                android:enabled="false"
                 android:layout="@layout/pref_layout">
         </Preference>
 
+        <com.angelstudio.newsapp.CustomPreference
+                app:allowDividerAbove="false"
+                app:allowDividerBelow="false"
+                android:layout="@layout/custom_preference_layout"
+                android:selectable="false"
+                android:key="@string/categories_setting">
+        </com.angelstudio.newsapp.CustomPreference>
+
+        <Preference
+                android:title="@string/country"
+                android:enabled="false"
+                android:summary="@string/Select_country"
+                android:layout="@layout/pref_layout">
+        </Preference>
+
+
         <ListPreference
-                android:key="@string/country"
-                android:title="Countries"
+                android:key="@string/country_setting"
+                android:title="@string/countries"
                 android:entries="@array/country_labels"
                 android:entryValues="@array/country_values"
                 android:defaultValue="us"
         />
 
-        <Preference
-                android:title="Language"
+   <!--     <Preference
+                android:title="@string/language"
+                android:enabled="false"
                 android:layout="@layout/pref_layout"
-                android:summary="Select language">
+                android:summary="@string/Select_language">
 
         </Preference>
 
-            <ListPreference
-                    android:key="@string/language"
-                    android:title="Languages"
-                    android:defaultValue="gb"
-                    android:entryValues="@array/laguage_values"
-                    android:entries="@array/language_labels">
-            </ListPreference>
-
-
+        <ListPreference
+                android:key="@string/language_setting"
+                android:title="@string/languages"
+                android:defaultValue="gb"
+                android:entryValues="@array/laguage_values"
+                android:entries="@array/language_labels">
+        </ListPreference>
+        -->
 
 
         <Preference
-                android:title="Alarms"
+                android:enabled="false"
+                android:title="@string/alarms"
                 android:textSize="20px"
                 android:layout="@layout/pref_layout">
 
@@ -55,24 +70,41 @@
 
 
         <Preference
-                android:title="Theme"
+                android:enabled="false"
+                android:title="@string/theme"
                 android:layout="@layout/pref_layout">
 
         </Preference>
         <SwitchPreference
-                android:title="Night mode"
+                android:key="@string/theme_setting"
+                android:title="@string/night_mode"
                 android:defaultValue="false"
-                android:summaryOn="Deactivate to select day mode"
-                android:summaryOff="Activate  to select night mode "
+                android:summaryOn="@string/night_mode_on"
+                android:summaryOff="@string/night_mode_off"
                 android:icon="@drawable/ic_moon"/>
 
         <Preference
-                android:title="About"
+                android:enabled="false"
+                android:title="@string/about"
                 android:layout="@layout/pref_layout"
                 app:initialExpandedChildrenCount="1">
         </Preference>
 
-    </PreferenceCategory>
+    <Preference
+             android:enabled="false"
+            android:layout="@layout/about">
 
-</PreferenceScreen>
+    </Preference>
+    <Preference
+             android:enabled="false"
+            android:layout="@layout/available_languages_layout"
+            android:summary="@string/Select_language">
+
+    </Preference>
+
+
+
+
+
+</androidx.preference.PreferenceScreen>
 

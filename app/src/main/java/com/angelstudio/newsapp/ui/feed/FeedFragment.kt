@@ -4,22 +4,22 @@ package com.angelstudio.newsapp.ui.feed
  import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
  import androidx.navigation.Navigation
-
-import androidx.navigation.fragment.NavHostFragment
- import androidx.navigation.ui.setupWithNavController
  import com.angelstudio.newsapp.R
+
  import com.angelstudio.newsapp.databinding.FragmentFeedBinding
 import com.angelstudio.newsapp.ui.base.ScopedFragment
-import kotlinx.android.synthetic.main.fragment_feed.*
+ import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+ import kotlinx.android.synthetic.main.top_headline_item.*
+
 
 class FeedFragment : ScopedFragment(),KodeinAware {
 
@@ -32,26 +32,6 @@ class FeedFragment : ScopedFragment(),KodeinAware {
     private lateinit var binding :FragmentFeedBinding
     private lateinit var myView :View
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
-
-        val host: NavHostFragment = activity?.supportFragmentManager
-            ?.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-            ?: return
-
-        // Set up Action Bar
-        val navController = host.navController
-
-        // Setup bottom navigation view
-        binding.bottomNav.setupWithNavController(navController)
-
-
-
-    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,20 +42,26 @@ class FeedFragment : ScopedFragment(),KodeinAware {
         return myView
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel =ViewModelProviders.of(this,viewModelFactory).get(FeedFragmentViewModel::class.java)
 
-
         bindUi()
-        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.Naws_App)
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = getString(R.string.Feed)
+
+
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.app_name)
+
 
         binding.mySwiperefresh.setOnRefreshListener {
             refresh()
             mySwiperefresh.setRefreshing(false)
         }
+
+
     }
+
 
     private fun bindUi()=launch {
         val topHeadline =viewModel.topHeadline.await()
@@ -85,30 +71,32 @@ class FeedFragment : ScopedFragment(),KodeinAware {
             if(it == null || it.isEmpty()) return@Observer
 
           binding.recyclerView.apply {
-                showShimmerAdapter()
                 topHeadlineAdapter = TopHeadlineAdapter(TopHeadlineListener { 
-                    url ->  viewModel.onTopHeadlineClicked(url)
-                })
+                    url,source ->  //viewModel.onTopHeadlineClicked(url)
+
+                 //   val actionDetail = FeedFragmentDirections.actionFeedFragmentToDetailFragment(url,source)
+                   // Navigation.findNavController(view!!).navigate(actionDetail)
+                    //viewModel.onDetailNavigated()
+
+                },lifecycle)
                 adapter = topHeadlineAdapter
                 topHeadlineAdapter.submitList(it)
-                hideShimmerAdapter()
+
             }
         })
 
-        naviagte.observe(this@FeedFragment, Observer {
-            if(it == null || it.isEmpty()) return@Observer
+       // naviagte.observe(this@FeedFragment, Observer {
+           // if(it == null || it.isEmpty()) return@Observer
 
-            val actionDetail = FeedFragmentDirections.actionFeedFragmentToDetailFragment(it)
-            Navigation.findNavController(view!!).navigate(actionDetail)
-            viewModel.onDetailNavigated()
-        })
+           // val actionDetail = FeedFragmentDirections.actionFeedFragmentToDetailFragment(it,source)
+            //Navigation.findNavController(view!!).navigate(actionDetail)
+           // viewModel.onDetailNavigated()
+        //})
     }
 
     private fun refresh()=launch {
         viewModel.fetchTopHeadline()
     }
-
-
 
 }
 

@@ -4,4 +4,12 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FCE4EC</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#CAC5C5</color>
+    <color name="colorBlue">#3700B3</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorsub">#4103DAC6</color>
+    <color name="colorsubday">#867365</color>
+
+
+
 </resources>

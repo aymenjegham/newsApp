@@ -5,7 +5,9 @@ import com.angelstudio.newsapp.data.db.TopHeadlineDatabase
 import com.angelstudio.newsapp.data.network.*
 import com.angelstudio.newsapp.data.repository.TopHeadlineRepository
 import com.angelstudio.newsapp.data.repository.TopHeadlineRepositoryImpl
+import com.angelstudio.newsapp.ui.SettingsFragment
 import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -24,10 +26,16 @@ class NewsApplication : Application(),KodeinAware{
         bind<ConnectivityInterceptor>() with singleton {ConnectivityInterceptorImpl(instance())}
         bind() from singleton { NewsApiService(instance()) }
         bind<TopHeadlineDataSource>() with singleton {TopHeadlineDataSourceImpl(instance())}
-        bind<TopHeadlineRepository>() with singleton {TopHeadlineRepositoryImpl(instance(),instance())}
+        bind<TopHeadlineRepository>() with singleton {TopHeadlineRepositoryImpl(instance(),instance(),instance())}
+
+
         bind() from provider {FeedFragmentViewModelFactory(instance())}
+
+
     }
+
     override fun onCreate() {
         super.onCreate()
+        AndroidThreeTen.init(this)
     }
 }

@@ -1,8 +1,11 @@
 package com.angelstudio.newsapp.data.repository
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.angelstudio.newsapp.R
+
 import com.angelstudio.newsapp.data.db.TopHeadlineDao
 import com.angelstudio.newsapp.data.db.entity.Article
 import com.angelstudio.newsapp.data.network.TopHeadlineDataSource
@@ -11,13 +14,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.threeten.bp.LocalDate
-import java.util.*
+
 
 class TopHeadlineRepositoryImpl(
+    context: Context,
     private val topHeadlineDataSource:TopHeadlineDataSource,
     private val  topHeadlineDao: TopHeadlineDao
 ) : TopHeadlineRepository {
+    private val appContext =context.applicationContext
+
+    private val preferences: SharedPreferences
+        get() = androidx.preference.PreferenceManager.getDefaultSharedPreferences(appContext)
 
     init {
         topHeadlineDataSource.downloadedTopHeadline.observeForever{newTopHeadline ->
@@ -29,17 +36,15 @@ class TopHeadlineRepositoryImpl(
     override suspend fun getTopHeadline(): LiveData<List<Article>> {
         return withContext(Dispatchers.IO){
 
-            initTopHeadlineData()
+            initTopHeadlineData(appContext)
             return@withContext topHeadlineDao.getTopHeadline()
 
         }
     }
 
     override suspend fun fetch() {
-        initTopHeadlineData()
+        initTopHeadlineData(appContext)
     }
-
-
 
     private fun persistFetchedTopHeadline(newTopHeadline: TopHeadlineNewsResponse) {
 
@@ -56,16 +61,25 @@ class TopHeadlineRepositoryImpl(
     }
 
 
-    private suspend fun initTopHeadlineData() {
-            fetchTopHeadline()
+    private suspend fun initTopHeadlineData(appContext: Context) {
+            fetchTopHeadline(appContext)
 
     }
 
-    private suspend fun fetchTopHeadline() {
+
+
+
+    private suspend fun fetchTopHeadline(appContext: Context) {
+        val selectedCategory =preferences.getString(appContext.getString(R.string.categories_setting),"general")
+        val selectedCountry =preferences.getString(appContext.getString(R.string.country_setting),"us")
         topHeadlineDataSource.fetchTopHeadline(
-            "sports","us","100"
+
+            selectedCategory,selectedCountry,"100"
         )
     }
+
+
+
 
 
 }

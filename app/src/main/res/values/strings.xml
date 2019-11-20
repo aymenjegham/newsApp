@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">NewsApp</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="Naws_App" translatable="false">NewsApp</string>
     <string name="Feed">Feed</string>
-    <string name="country">country</string>
-    <string name="language">language</string>
+    <string name="country">Country</string>
+    <string name="countries">Countries</string>
+    <string name="languages">languages</string>
     <string name="business">business</string>
     <string name="sports">sports</string>
     <string name="general">general</string>
@@ -14,6 +14,92 @@
     <string name="science">science</string>
     <string name="entertainment">entertainment</string>
     <string name="technology">technology</string>
-    <string name="categories">categories</string>
+    <string name="categories">Categories</string>
+    <string name="Settings">Settings</string>
+    <string name="Select_category">Select a category</string>
+    <string name="Select_country">Select a country</string>
+    <string name="Select_language">Select a language</string>
+    <string name="alarms">Alarms</string>
+    <string name="theme">Theme</string>
+    <string name="night_mode">Night mode</string>
+    <string name="night_mode_on">Deactivate to select day mode</string>
+    <string name="night_mode_off">Activate  to select night mode</string>
+    <string name="about">About</string>
+    <string name="language">Language</string>
+    <string name ="ar">Argentina</string>
+    <string name="au">Australia</string>
+    <string name ="at">Austria</string>
+    <string name="be">Belgium</string>
+    <string name="br">Brazil</string>
+    <string name="bg">Bulgaria</string>
+    <string name="ca">Canada</string>
+    <string name="cn">China</string>
+    <string name="co">Colombia</string>
+    <string name="cu">Cuba</string>
+    <string name="cz">Czech Republic</string>
+    <string name="eg">Egypt</string>
+    <string name="fr">France</string>
+    <string name="de">Germany</string>
+    <string name="gr">Greece</string>
+    <string name="hk">Hong Kong</string>
+    <string name="hu">Hungary</string>
+    <string name="in">India</string>
+    <string name="id">Indonesia</string>
+    <string name="ie">Ireland</string>
+    <string name="il">Israel</string>
+    <string name="it">Italy</string>
+    <string name="jp">Japan</string>
+    <string name="lv">Latvia</string>
+    <string name="lt">Lithuania</string>
+    <string name="my">Malaysia</string>
+    <string name="mx">Mexico</string>
+    <string name="ma">Morocco</string>
+    <string name="nl">Netherlands</string>
+    <string name="nz">New Zealand</string>
+    <string name="ng">Nigeria</string>
+    <string name="no">Norway</string>
+    <string name="ph">Philippines</string>
+    <string name="pl">Poland</string>
+    <string name="pt">Portugal</string>
+    <string name="ro">Romania</string>
+    <string name="ru">Russia</string>
+    <string name="sa">Saudi Arabia</string>
+    <string name="rs">Serbia</string>
+    <string name="sg">Singapore</string>
+    <string name="sk">Slovakia</string>
+    <string name="si">Slovenia</string>
+    <string name="za">South Africa</string>
+    <string name="kr">South Korea</string>
+    <string name="se">Sweden</string>
+    <string name="ch">Switzerland</string>
+    <string name="tw">Taiwan</string>
+    <string name="th">Thailand</string>
+    <string name="tr">Turkey</string>
+    <string name="ae">UAE</string>
+    <string name="ua">Ukraine</string>
+    <string name="gb">United Kingdom</string>
+    <string name="us">United States</string>
+    <string name="ve">Venezuela</string>
+    <string name="country_setting" translatable="false">Country</string>
+    <string name="language_setting" translatable="false">Language</string>
+    <string name="theme_setting" translatable="false">Theme</string>
+    <string name="Available_languages">This app is available in 3 languages</string>
+    <string name="flag_of_the_united_kingdom">Flag of the united kingdom</string>
+    <string name="flag_of_france">Flag of france</string>
+    <string name="arabic_language">Arabic language</string>
+    <string name="version">Version</string>
+    <string name="_1_0" translatable="false">1.0</string>
+     <string name="aymen_jegham" translatable="false">Aymen Jegham</string>
+    <string name="contact">Contact</string>
+    <string name="jegham_aymen_89_gmail_com" translatable="false">jegham.aymen.89@gmail.com</string>
+    <string name="this_app_is_">This app is only made possible with the use of the News API. https://newsapi.org/
+    </string>
+    <string name="information_about_app_version">information about app version</string>
+    <string name="contact_info">Contact info</string>
+    <string name="author">author</string>
+    <string name="categories_setting" translatable="false">Categories_setting</string>
+    <string name="headline_item_image">Headline item image</string>
+    <string name="source_image">source image</string>
+
 
 </resources>

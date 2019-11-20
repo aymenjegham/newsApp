@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/ic_info"
+                    android:id="@+id/imageView4"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="@string/information_about_app_version"/>
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" app:srcCompat="@drawable/ic_person"
+                    android:id="@+id/imageView5"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:contentDescription="@string/author"/>
+    <TextView
+            android:text="@string/version"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="16sp"/>
+            <TextView
+                    android:text="@string/_1_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    android:layout_marginStart="8dp"
+                    android:theme="@style/Preference.desc"/>
+    <TextView
+            android:text="@string/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="16sp"/>
+            <TextView
+                    android:text="@string/aymen_jegham"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                    android:theme="@style/Preference.desc"/>
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" app:srcCompat="@drawable/ic_email"
+                    android:id="@+id/imageView6" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:contentDescription="@string/contact_info"/>
+    <TextView
+            android:text="@string/contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textSize="16sp"/>
+            <TextView
+                    android:text="@string/jegham_aymen_89_gmail_com"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:layout_constraintStart_toEndOf="@+id/imageView6" android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                    android:theme="@style/Preference.desc"/>
+            <TextView
+                    android:text="@string/this_app_is_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView8"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:textAlignment="center"
+                    android:textColor="@color/design_default_color_error"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

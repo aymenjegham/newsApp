@@ -1,5 +1,6 @@
 package com.angelstudio.newsapp.ui.feed
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.angelstudio.newsapp.data.repository.TopHeadlineRepository
@@ -9,11 +10,11 @@ class FeedFragmentViewModel(
     private val topHeadlineRepository: TopHeadlineRepository
 ) :ViewModel(){
 
-
     val topHeadline by lazyDeferred{
         topHeadlineRepository.getTopHeadline()
     }
     suspend fun fetchTopHeadline(){
+
         topHeadlineRepository.fetch()
     }
 
@@ -33,5 +34,6 @@ class FeedFragmentViewModel(
     fun onDetailNavigated() {
         _navigateToDetail.value=null
     }
+
 
 }
