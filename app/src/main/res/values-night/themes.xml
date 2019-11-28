@@ -12,7 +12,7 @@
     </style>
 
     <style name="datenauthor">
-        <item name="android:textColor">@color/colorsub</item>
+        <item name="android:textColor">@color/colorsub3</item>
     </style>
 
     <style name="ToolbarTheme" parent="Theme.AppCompat">
@@ -26,6 +26,7 @@
         <item name="android:colorBackground">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">#FFFFFF</item>
+
     </style>
 
 

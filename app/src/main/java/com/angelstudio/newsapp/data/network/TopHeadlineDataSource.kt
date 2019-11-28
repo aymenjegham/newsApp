@@ -5,6 +5,8 @@ import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
 
 interface TopHeadlineDataSource {
     val downloadedTopHeadline: LiveData<TopHeadlineNewsResponse>
+    val connectivityState: LiveData<Boolean>
+
 
     suspend fun fetchTopHeadline(
         category:String,

@@ -40,6 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="3dp"
+                app:itemIconTint="@animator/navigation_item_text_color"
+                app:itemTextColor="@animator/navigation_item_text_color"
                 app:labelVisibilityMode="labeled"
                 app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
                 app:layout_scrollFlags="scroll|enterAlways"

@@ -100,6 +100,8 @@
     <string name="categories_setting" translatable="false">Categories_setting</string>
     <string name="headline_item_image">Headline item image</string>
     <string name="source_image">source image</string>
+    <string name="share_on_social_media">Share on social media</string>
+    <string name="bookmark_article">Bookmark article</string>
 
 
 </resources>

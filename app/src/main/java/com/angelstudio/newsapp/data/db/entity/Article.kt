@@ -12,7 +12,7 @@ data class Article(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val author: String?,
-    val content: String?,
+    var content: String?,
     val description: String?,
     val publishedAt: String?,
     @Embedded(prefix="source_")

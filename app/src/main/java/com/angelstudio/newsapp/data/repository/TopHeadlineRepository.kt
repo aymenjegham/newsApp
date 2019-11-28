@@ -7,6 +7,7 @@ import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
 interface TopHeadlineRepository {
 
     suspend fun getTopHeadline(): LiveData<List<Article>>
+    suspend fun getConnectivity(): LiveData<Boolean>
 
 
     suspend fun fetch()

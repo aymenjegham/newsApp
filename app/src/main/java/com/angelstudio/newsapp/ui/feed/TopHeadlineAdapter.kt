@@ -1,5 +1,7 @@
 package com.angelstudio.newsapp.ui.feed
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,47 +13,63 @@ import com.angelstudio.newsapp.data.db.entity.Article
 import com.angelstudio.newsapp.databinding.TopHeadlineItemBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
-class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: Lifecycle) :ListAdapter<Article,TopHeadlineAdapter.TopHeadlineViewHolder>(TopHeadlineDiffCallback()) {
+class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: Lifecycle,val cxt : Context) :ListAdapter<Article,TopHeadlineAdapter.TopHeadlineViewHolder>(TopHeadlineDiffCallback()) {
+
+    private val preferences: SharedPreferences
+        get() = androidx.preference.PreferenceManager.getDefaultSharedPreferences(cxt)
 
     override fun onBindViewHolder(holder: TopHeadlineViewHolder, position: Int) {
 
+        val country =preferences.getString("Country","")
 
-        holder.bind(getItem(position),clickListener)
+        holder.bind(getItem(position),clickListener,country)
 
         if(  getItem(position)?.source?.name.equals("Youtube.com")){
-            getItem(position).url?.let { holder.cueVideo(it) } }
+            getItem(position).url?.let { holder.cueVideo(it) }
+        }
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopHeadlineViewHolder {
         val layoutInflater=LayoutInflater.from(parent.context)
         val binding = TopHeadlineItemBinding.inflate(layoutInflater,parent,false)
+
         lifecycle.addObserver(binding.youtubePlayerView)
 
         return TopHeadlineViewHolder(binding)
     }
 
     class TopHeadlineViewHolder(val binding: TopHeadlineItemBinding): RecyclerView.ViewHolder(binding.root){
-        private var youTubePlayer: YouTubePlayer? = null
         private var currentVideoId: String? = null
+        private var youTubePlayer: YouTubePlayer? = null
 
         init {
-            binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+             binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                 override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
                     youTubePlayer = initializedYouTubePlayer
-
-                }
+                 }
             })
+       }
+        fun bind(item: Article, clickListener: TopHeadlineListener,country : String?){
 
-        }
-        fun bind(item: Article, clickListener: TopHeadlineListener){
-            binding.article= item
-            binding.clickListener =clickListener
-            binding.executePendingBindings()
+            var item1 :Article =item
+            if(country.equals("eg") || country.equals("jp") || country.equals("ae")
+                || country.equals("il") || country.equals("hk")   ){
+                item1.content=null
+                binding.article= item1
+                binding.clickListener =clickListener
+                binding.executePendingBindings()
+
+            }else{
+                binding.article= item
+                binding.clickListener =clickListener
+                binding.executePendingBindings()
+            }
+
+
         }
         fun cueVideo(urlsrc: String) {
+
             val link = urlsrc
             val url = link.split("v=".toRegex()).dropLastWhile { it.isEmpty()
             }.toTypedArray().get(1)

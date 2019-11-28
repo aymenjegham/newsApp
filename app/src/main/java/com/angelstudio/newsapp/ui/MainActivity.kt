@@ -1,20 +1,15 @@
 package com.angelstudio.newsapp.ui
 
-import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.angelstudio.newsapp.R
-import com.yariksoffice.lingver.Lingver
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_feed.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,10 +40,6 @@ class MainActivity : AppCompatActivity() {
         }else{
             AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_NO)
         }
-
-
-
-
 
     }
 }

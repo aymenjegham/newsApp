@@ -31,7 +31,12 @@ class TopHeadlineRepositoryImpl(
             persistFetchedTopHeadline(newTopHeadline)
 
         }
+        topHeadlineDataSource.connectivityState.observeForever { state ->
+            Log.v("checkingconnectivity",state.toString())
+        }
+
     }
+
 
     override suspend fun getTopHeadline(): LiveData<List<Article>> {
         return withContext(Dispatchers.IO){
@@ -39,8 +44,14 @@ class TopHeadlineRepositoryImpl(
             initTopHeadlineData(appContext)
             return@withContext topHeadlineDao.getTopHeadline()
 
+
         }
     }
+
+    override suspend fun getConnectivity(): LiveData<Boolean> {
+        return topHeadlineDataSource.connectivityState
+    }
+
 
     override suspend fun fetch() {
         initTopHeadlineData(appContext)
@@ -74,7 +85,7 @@ class TopHeadlineRepositoryImpl(
         val selectedCountry =preferences.getString(appContext.getString(R.string.country_setting),"us")
         topHeadlineDataSource.fetchTopHeadline(
 
-            selectedCategory,selectedCountry,"100"
+            selectedCategory!!,selectedCountry!!,"100"
         )
     }
 

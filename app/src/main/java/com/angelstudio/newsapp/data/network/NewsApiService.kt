@@ -10,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 
 const val API_KEY = "627b1345f60d4335a9bcdd424a151fc2"
@@ -47,8 +48,11 @@ interface NewsApiService {
             }
 
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(requestInterceptor)
+                .connectTimeout(20,TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(connectivityInterceptor)
+                .addInterceptor(requestInterceptor)
                 .build()
 
             return Retrofit.Builder()

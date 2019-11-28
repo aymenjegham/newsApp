@@ -12,6 +12,9 @@ class FeedFragmentViewModel(
 
     val topHeadline by lazyDeferred{
         topHeadlineRepository.getTopHeadline()
+     }
+    val isConnected by lazyDeferred{
+        topHeadlineRepository.getConnectivity()
     }
     suspend fun fetchTopHeadline(){
 

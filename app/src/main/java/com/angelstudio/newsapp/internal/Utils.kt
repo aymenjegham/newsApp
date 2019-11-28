@@ -1,11 +1,19 @@
 package com.angelstudio.newsapp.internal
 
-import android.util.Log
+
 
 
 fun edit(content: String?): CharSequence? {
 
 var cnt =content?.split("[+")
 
-    return cnt?.get(0)
+    var cntnt = cnt?.get(0)
+
+    if(cntnt != null){
+        if(cntnt.contains("[[getSimpleString")){
+            return null
+        }
+    }
+    return cntnt
 }
+

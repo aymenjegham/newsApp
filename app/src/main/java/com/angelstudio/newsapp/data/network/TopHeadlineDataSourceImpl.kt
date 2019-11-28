@@ -13,15 +13,24 @@ class TopHeadlineDataSourceImpl(
     override val downloadedTopHeadline: LiveData<TopHeadlineNewsResponse>
         get() = _downloadedTopHeadline
 
+    private val _connectivityState = MutableLiveData<Boolean>()
+    override val connectivityState :LiveData<Boolean>
+        get() = _connectivityState
+
+
     override suspend fun fetchTopHeadline(category: String, country: String,pagesize:String) {
         try {
             val fetchTopHeadline = newsApiService
                 .getTopHeadlines(category, country,pagesize)
                 .await()
             _downloadedTopHeadline.postValue(fetchTopHeadline)
+            _connectivityState.postValue(false)
+
         }
         catch (e: NoConnectivityException) {
             Log.e("Connectivity", "No internet connection.", e)
+            _connectivityState.postValue(true)
+
         }
     }
 }

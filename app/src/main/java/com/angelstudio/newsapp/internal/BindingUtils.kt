@@ -1,22 +1,22 @@
 package com.angelstudio.newsapp.internal
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.angelstudio.newsapp.R
 import com.angelstudio.newsapp.data.db.entity.Article
 import com.bumptech.glide.Glide
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
 import org.threeten.bp.LocalDateTime
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
-import kotlinx.android.synthetic.main.top_headline_item.view.*
+
 
 
 @BindingAdapter("title")
@@ -26,11 +26,12 @@ fun TextView.setTitle(item: Article?) {
     }
 }
 
+
+
 @BindingAdapter("content")
 fun TextView.setContent(item: Article?) {
     item?.let {
         text = edit(it.content)
-
     }
 }
 
@@ -82,12 +83,23 @@ fun ImageView.setImage(item: Article?) {
     }
 
     val requestOptions = com.bumptech.glide.request.RequestOptions()
-        .placeholder(R.drawable.ic_icon_round)
-        .error(R.drawable.ic_icon_round)
+        //.placeholder(R.drawable.radio_launcher_round)
+        //.error(R.drawable.radio_launcher_round)
 
     Glide.with(context)
         .applyDefaultRequestOptions(requestOptions)
         .load(item?.urlToImage)
+        .listener(object : RequestListener<Drawable>{
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                visibility=View.GONE
+                return false
+            }
+
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                return false
+            }
+
+        })
         .into(this)
 }
 
