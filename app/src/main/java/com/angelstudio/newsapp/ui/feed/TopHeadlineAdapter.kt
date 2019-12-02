@@ -14,7 +14,7 @@ import com.angelstudio.newsapp.databinding.TopHeadlineItemBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
-class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: Lifecycle,val cxt : Context) :ListAdapter<Article,TopHeadlineAdapter.TopHeadlineViewHolder>(TopHeadlineDiffCallback()) {
+class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val archiveListener : ArchiveListener,val  lifecycle: Lifecycle,val cxt : Context) :ListAdapter<Article,TopHeadlineAdapter.TopHeadlineViewHolder>(TopHeadlineDiffCallback()) {
 
     private val preferences: SharedPreferences
         get() = androidx.preference.PreferenceManager.getDefaultSharedPreferences(cxt)
@@ -23,10 +23,11 @@ class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: 
 
         val country =preferences.getString("Country","")
 
-        holder.bind(getItem(position),clickListener,country)
+        holder.bind(getItem(position),clickListener,archiveListener,country)
 
         if(  getItem(position)?.source?.name.equals("Youtube.com")){
-            getItem(position).url?.let { holder.cueVideo(it) }
+            getItem(position).url?.let {
+                holder.cueVideo(it) }
         }
 
     }
@@ -42,15 +43,15 @@ class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: 
     class TopHeadlineViewHolder(val binding: TopHeadlineItemBinding): RecyclerView.ViewHolder(binding.root){
         private var currentVideoId: String? = null
         private var youTubePlayer: YouTubePlayer? = null
-
+/*
         init {
              binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                 override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
                     youTubePlayer = initializedYouTubePlayer
                  }
             })
-       }
-        fun bind(item: Article, clickListener: TopHeadlineListener,country : String?){
+       }  */
+        fun bind(item: Article, clickListener: TopHeadlineListener,archiveListener:ArchiveListener,country : String?){
 
             var item1 :Article =item
             if(country.equals("eg") || country.equals("jp") || country.equals("ae")
@@ -58,17 +59,26 @@ class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: 
                 item1.content=null
                 binding.article= item1
                 binding.clickListener =clickListener
+                binding.archiveListener=archiveListener
                 binding.executePendingBindings()
 
             }else{
                 binding.article= item
                 binding.clickListener =clickListener
+                binding.archiveListener=archiveListener
                 binding.executePendingBindings()
             }
+
+    binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+        override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
+            youTubePlayer = initializedYouTubePlayer
+        }
+    })
 
 
         }
         fun cueVideo(urlsrc: String) {
+
 
             val link = urlsrc
             val url = link.split("v=".toRegex()).dropLastWhile { it.isEmpty()
@@ -76,14 +86,20 @@ class TopHeadlineAdapter(val clickListener: TopHeadlineListener,val  lifecycle: 
 
             currentVideoId = url
 
-            if (youTubePlayer == null)
-                return
+            if (youTubePlayer == null) {
+                //return
+                binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                    override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
+                        youTubePlayer = initializedYouTubePlayer
+                        youTubePlayer!!.cueVideo(url, 0f)
+                    }
+                })
+            }else{
+                youTubePlayer!!.cueVideo(url, 0f)
+            }
 
-            youTubePlayer!!.cueVideo(url, 0f)
+
         }
-
-
-
     }
 }
 
@@ -98,10 +114,10 @@ class TopHeadlineDiffCallback :DiffUtil.ItemCallback<Article>(){
 
 class TopHeadlineListener(val clickListener: (url: String,source :String) -> Unit){
     fun onClick(article: Article )= clickListener(article.url!!,article.source.name!!)
+}
 
-
-
-
+class ArchiveListener(val clickListener: (article: Article) -> Unit){
+    fun onClick(article: Article )= clickListener(article)
 }
 
 

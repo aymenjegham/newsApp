@@ -3,8 +3,12 @@ package com.angelstudio.newsapp.ui.feed
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.angelstudio.newsapp.data.db.entity.Article
 import com.angelstudio.newsapp.data.repository.TopHeadlineRepository
 import com.angelstudio.newsapp.internal.lazyDeferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class FeedFragmentViewModel(
     private val topHeadlineRepository: TopHeadlineRepository
@@ -36,6 +40,12 @@ class FeedFragmentViewModel(
 
     fun onDetailNavigated() {
         _navigateToDetail.value=null
+    }
+
+       fun archive(article: Article) {
+          GlobalScope.launch(Dispatchers.IO) {
+              topHeadlineRepository.archive(article)
+          }
     }
 
 

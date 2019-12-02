@@ -5,12 +5,15 @@
     <data>
         <variable
         name="article"
-        type="com.angelstudio.newsapp.data.db.entity.Article">
-        </variable>
+        type="com.angelstudio.newsapp.data.db.entity.Article"/>
         
         <variable
                 name="clickListener"
                 type="com.angelstudio.newsapp.ui.feed.TopHeadlineListener"/>
+
+        <variable
+            name="archiveListener"
+            type="com.angelstudio.newsapp.ui.feed.ArchiveListener"/>
     </data>
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -144,6 +147,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView7"
                     app:layout_constraintTop_toBottomOf="@+id/content"
+                    android:onClick="@{() ->archiveListener.onClick(article)}"
+
                     app:srcCompat="@drawable/ic_bookmark" />
 
             <androidx.constraintlayout.widget.Guideline

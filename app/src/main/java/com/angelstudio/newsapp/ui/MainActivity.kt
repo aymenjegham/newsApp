@@ -3,6 +3,8 @@ package com.angelstudio.newsapp.ui
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
@@ -25,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressed() }
 
 
-
-
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
             ?: return
         // Set up Action Bar
@@ -40,6 +40,14 @@ class MainActivity : AppCompatActivity() {
         }else{
             AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_NO)
         }
+
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
 
     }
 }

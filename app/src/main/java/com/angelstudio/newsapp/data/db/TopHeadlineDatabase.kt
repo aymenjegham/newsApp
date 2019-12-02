@@ -4,13 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.angelstudio.newsapp.data.db.entity.Archive
 import com.angelstudio.newsapp.data.db.entity.Article
 import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
 
 
-@Database(entities = [Article::class],
-    version=1,
-    exportSchema = false
+@Database(entities = [Article::class, Archive::class], version=1, exportSchema = false
 )
 abstract class TopHeadlineDatabase : RoomDatabase() {
 

@@ -5,9 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.angelstudio.newsapp.data.db.entity.Archive
 import com.angelstudio.newsapp.data.db.entity.Article
-import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
-import org.threeten.bp.LocalDate
 
 @Dao
 interface TopHeadlineDao {
@@ -20,4 +19,7 @@ interface TopHeadlineDao {
 
     @Query("delete from TopHeadline")
     fun deleteOldTopHeadline()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun archive(archive: Archive)
 }

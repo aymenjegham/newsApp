@@ -8,6 +8,8 @@ interface TopHeadlineRepository {
 
     suspend fun getTopHeadline(): LiveData<List<Article>>
     suspend fun getConnectivity(): LiveData<Boolean>
+    suspend fun archive(article: Article)
+
 
 
     suspend fun fetch()

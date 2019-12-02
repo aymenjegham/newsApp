@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import com.angelstudio.newsapp.R
 
 import com.angelstudio.newsapp.data.db.TopHeadlineDao
+import com.angelstudio.newsapp.data.db.entity.Archive
 import com.angelstudio.newsapp.data.db.entity.Article
 import com.angelstudio.newsapp.data.network.TopHeadlineDataSource
 import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
@@ -50,6 +51,21 @@ class TopHeadlineRepositoryImpl(
 
     override suspend fun getConnectivity(): LiveData<Boolean> {
         return topHeadlineDataSource.connectivityState
+    }
+
+    override suspend fun archive(article: Article) {
+        topHeadlineDao.archive(
+            Archive(
+                        article.id,
+                        article.author,
+                        article.content,
+                        article.description,
+                        article.publishedAt,
+                        article.source,
+                        article.title,
+                        article.url,
+                        article.urlToImage
+                    ))
     }
 
 

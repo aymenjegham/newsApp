@@ -68,6 +68,7 @@ class FeedFragment : ScopedFragment(),KodeinAware {
         val topHeadline =viewModel.topHeadline.await()
         val isConnected =viewModel.isConnected.await()
 
+
         isConnected.observe(this@FeedFragment, Observer {
             if(it==true){
                  binding.progressBar2.apply {
@@ -92,6 +93,9 @@ class FeedFragment : ScopedFragment(),KodeinAware {
                   val actionDetail = FeedFragmentDirections.actionFeedFragmentToDetailFragment(url,source)
                     Navigation.findNavController(view!!).navigate(actionDetail)
                     viewModel.onDetailNavigated()
+
+                }, ArchiveListener {
+                    viewModel.archive(it)
 
                 },lifecycle,context)
                 adapter = topHeadlineAdapter
