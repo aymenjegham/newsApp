@@ -88,4 +88,24 @@
     <string name="information_about_app_version">معلومات حول إصدار التطبيق</string>
     <string name="this_app_is_">تم إجراء هذا التطبيق فقط باستخدام تطبيق News API. https://newsapi.org</string>
     <string name="version">الإصدار</string>
+    <string name="archive">أرشيف</string>
+    <string name="headline_item_image">"صورة المقال "</string>
+    <string name="share_on_social_media">أنشر على وسائل الاعلام الاجتماعية</string>
+    <string name="source_image">صورة</string>
+    <string name="bookmark_article">"إحفظ المقال "</string>
+    <string name="warningdesarchive">أنت على وشك إسقاط هذه المقالة من الأرشيف</string>
+    <string name="warning">تحذير</string>
+    <string name="agree">"موافق "</string>
+    <string name="disagree">" غير موافق "</string>
+    <string name="cancel">إلغاء</string>
+    <string name="yes">نعم</string>
+    <string name="warningarchive">هل تريد أرشفة هذه المقالة ؟</string>
+    <string name="archived">تم أرشفة المقال بنجاح</string>
+    <string name="desarchived">تمت إزالة المقال بنجاح!</string>
+    <string name="nointernet">لا يوجد اتصال بالإنترنت!</string>
+    <string name="delete_all_archive">حذف كل الأرشيف؟</string>
+    <string name="warning_delete_all">هل أنت متأكد من أنك تريد حذف كل أرشيفك؟</string>
+    <string name="delete_all_success">تم حذف جميع المقالات المؤرشفة بنجاح</string>
+
+
 </resources>

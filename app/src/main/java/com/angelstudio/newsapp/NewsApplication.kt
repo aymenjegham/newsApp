@@ -6,6 +6,7 @@ import com.angelstudio.newsapp.data.network.*
 import com.angelstudio.newsapp.data.repository.TopHeadlineRepository
 import com.angelstudio.newsapp.data.repository.TopHeadlineRepositoryImpl
 import com.angelstudio.newsapp.ui.SettingsFragment
+import com.angelstudio.newsapp.ui.archive.ArchiveViewModelFactory
 import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
@@ -30,6 +31,8 @@ class NewsApplication : Application(),KodeinAware{
 
 
         bind() from provider {FeedFragmentViewModelFactory(instance())}
+        bind() from provider {ArchiveViewModelFactory(instance())}
+
 
 
     }

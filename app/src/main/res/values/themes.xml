@@ -17,6 +17,11 @@
         <item name="android:textColor">@color/colorsubday2</item>
     </style>
 
+    <style name="UpButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:backgroundTint">@color/colorWhite</item>
+        <item name="android:textAppearance">@dimen/cardview_default_radius</item>
+    </style>
+
 
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light">
         <item name="android:colorBackground">@color/colorPrimary</item>

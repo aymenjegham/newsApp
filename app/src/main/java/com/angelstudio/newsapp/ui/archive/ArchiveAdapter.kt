@@ -1,8 +1,7 @@
-package com.angelstudio.newsapp.ui.feed
+package com.angelstudio.newsapp.ui.archive
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
@@ -10,16 +9,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.angelstudio.newsapp.data.db.entity.Article
-import com.angelstudio.newsapp.databinding.TopHeadlineItemBinding
+import com.angelstudio.newsapp.databinding.ArchiveItemBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
-class TopHeadlineAdapter(private val clickListener: TopHeadlineListener,private val archiveListener : ArchiveListener,private val shareListener : ShareListener,val  lifecycle: Lifecycle,private val cxt : Context) :ListAdapter<Article,TopHeadlineAdapter.TopHeadlineViewHolder>(TopHeadlineDiffCallback()) {
+class ArchiveAdapter(private val clickListener: ArchiveListener, private val archiveListener : ArchivearchiveListener, private val shareListener : ShareListener, val  lifecycle: Lifecycle, private val cxt : Context) :ListAdapter<Article,ArchiveAdapter.ArchiveViewHolder>(ArchiveDiffCallback()) {
 
     private val preferences: SharedPreferences
         get() = androidx.preference.PreferenceManager.getDefaultSharedPreferences(cxt)
 
-    override fun onBindViewHolder(holder: TopHeadlineViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArchiveViewHolder, position: Int) {
 
         val country =preferences.getString("Country","")
 
@@ -31,45 +30,28 @@ class TopHeadlineAdapter(private val clickListener: TopHeadlineListener,private 
         }
 
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopHeadlineViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArchiveViewHolder {
         val layoutInflater=LayoutInflater.from(parent.context)
-        val binding = TopHeadlineItemBinding.inflate(layoutInflater,parent,false)
+        val binding = ArchiveItemBinding.inflate(layoutInflater,parent,false)
 
         lifecycle.addObserver(binding.youtubePlayerView)
 
-        return TopHeadlineViewHolder(binding)
+        return ArchiveViewHolder(binding)
     }
 
-    class TopHeadlineViewHolder(val binding: TopHeadlineItemBinding): RecyclerView.ViewHolder(binding.root){
+    class ArchiveViewHolder(val binding: ArchiveItemBinding): RecyclerView.ViewHolder(binding.root){
         private var currentVideoId: String? = null
         private var youTubePlayer: YouTubePlayer? = null
-/*
-        init {
-             binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
-                    youTubePlayer = initializedYouTubePlayer
-                 }
-            })
-       }  */
-        fun bind(item: Article, clickListener: TopHeadlineListener,archiveListener:ArchiveListener,shareListener: ShareListener,country : String?){
 
-            var item1 :Article =item
-            if(country.equals("eg") || country.equals("jp") || country.equals("ae")
-                || country.equals("il") || country.equals("hk")   ){
-                item1.content=null
-                binding.article= item1
-                binding.clickListener =clickListener
-                binding.archiveListener=archiveListener
-                binding.shareListener=shareListener
-                binding.executePendingBindings()
+        fun bind(item: Article, clickListener: ArchiveListener,archiveListener:ArchivearchiveListener,shareListener: ShareListener,country : String?){
 
-            }else{
+
                 binding.article= item
                 binding.clickListener =clickListener
                 binding.archiveListener=archiveListener
                 binding.shareListener=shareListener
                 binding.executePendingBindings()
-            }
+
 
     binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
         override fun onReady(initializedYouTubePlayer: YouTubePlayer) {
@@ -105,7 +87,7 @@ class TopHeadlineAdapter(private val clickListener: TopHeadlineListener,private 
     }
 }
 
-class TopHeadlineDiffCallback :DiffUtil.ItemCallback<Article>(){
+class ArchiveDiffCallback :DiffUtil.ItemCallback<Article>(){
     override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
         return oldItem.title == newItem.title
     }
@@ -114,16 +96,15 @@ class TopHeadlineDiffCallback :DiffUtil.ItemCallback<Article>(){
     }
 }
 
-class TopHeadlineListener(val clickListener: (url: String,source :String) -> Unit){
+class ArchiveListener(val clickListener: (url: String,source :String) -> Unit){
     fun onClick(article: Article )= clickListener(article.url!!,article.source.name!!)
 }
 
-class ArchiveListener(val clickListener: (article: Article) -> Unit){
+class ArchivearchiveListener(val clickListener: (article: Article) -> Unit){
     fun onClick(article: Article )= clickListener(article)
 }
 
 class ShareListener(val clickListener: (article: Article) -> Unit){
     fun onClick(article: Article )= clickListener(article)
 }
-
 

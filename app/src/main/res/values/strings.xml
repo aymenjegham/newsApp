@@ -102,6 +102,24 @@
     <string name="source_image">source image</string>
     <string name="share_on_social_media">Share on social media</string>
     <string name="bookmark_article">Bookmark article</string>
+    <string name="archive">Archive</string>
+    <string name="warning">Warning</string>
+    <string name="warningdesarchive">You are about to drop this article from archive </string>
+    <string name="agree">Agree</string>
+    <string name="disagree">Disagree</string>
+    <string name="warningarchive">Do you really want to archive this article for later ?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="nointernet">No internet connection!</string>
+    <string name="archived">Article is successfully archived!</string>
+    <string name="desarchived">Article is successfully droped from archive!</string>
+    <string name="delete_all_archive">Delete all archive ?</string>
+    <string name="warning_delete_all">Are you sure you want to delete all your archive ?</string>
+    <string name="delete_all_success">All archived articles are successfuly deleted </string>
+    <string name="share_message" translatable="false">%s  : %s  \n stay tuned by downloading our app from https://play.google.com/store/apps/dev?id=7604417857037795067 </string>
+
+
+
 
 
 </resources>

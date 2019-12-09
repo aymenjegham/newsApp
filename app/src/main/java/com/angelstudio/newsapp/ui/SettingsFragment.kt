@@ -2,6 +2,8 @@ package com.angelstudio.newsapp.ui
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
@@ -13,7 +15,9 @@ import androidx.preference.SwitchPreference
 import com.angelstudio.newsapp.R
 import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModel
 import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModelFactory
- import kotlinx.coroutines.GlobalScope
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -30,6 +34,10 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware ,SharedPreferen
     override val kodein by closestKodein()
     private val viewModelFactory: FeedFragmentViewModelFactory by instance()
     private lateinit var viewModel: FeedFragmentViewModel
+    private lateinit var fab: FloatingActionButton
+    private lateinit var linearLayout: LinearLayout
+
+
 
 
 
@@ -42,6 +50,12 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware ,SharedPreferen
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.Settings)
+
+        fab = (activity as? AppCompatActivity)!!.findViewById(R.id.floatingActionButton)
+        fab.visibility= View.INVISIBLE
+
+        linearLayout = (activity as? AppCompatActivity)!!.findViewById(R.id.tvdeleteall)
+        linearLayout.visibility=View.GONE
 
 
     }

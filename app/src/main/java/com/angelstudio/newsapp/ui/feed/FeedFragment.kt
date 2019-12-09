@@ -1,25 +1,35 @@
 package com.angelstudio.newsapp.ui.feed
+ import android.app.Activity
+ import android.content.Intent
+ import android.os.Build
  import android.os.Bundle
  import android.util.Log
+ import android.view.Gravity
  import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+ import android.widget.LinearLayout
  import android.widget.Toast
  import androidx.appcompat.app.AppCompatActivity
-  import androidx.databinding.DataBindingUtil
+ import androidx.core.app.ShareCompat
+ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
  import androidx.navigation.Navigation
+ import com.afollestad.materialdialogs.MaterialDialog
  import com.angelstudio.newsapp.R
  import com.angelstudio.newsapp.databinding.FragmentFeedBinding
 
  import com.angelstudio.newsapp.ui.base.ScopedFragment
+ import com.google.android.material.floatingactionbutton.FloatingActionButton
  import com.google.android.material.snackbar.Snackbar
+ import es.dmoral.toasty.Toasty
  import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+ import tyrantgit.explosionfield.ExplosionField
 
 
 class FeedFragment : ScopedFragment(),KodeinAware {
@@ -32,6 +42,12 @@ class FeedFragment : ScopedFragment(),KodeinAware {
     private lateinit var topHeadlineAdapter: TopHeadlineAdapter
     private lateinit var binding : FragmentFeedBinding
     private lateinit var myView :View
+    private lateinit var mExplosionField :ExplosionField
+    private lateinit var fab: FloatingActionButton
+    private lateinit var linearLayout: LinearLayout
+
+
+
 
 
 
@@ -45,10 +61,23 @@ class FeedFragment : ScopedFragment(),KodeinAware {
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.app_name)
 
+        fab = (activity as? AppCompatActivity)!!.findViewById(R.id.floatingActionButton)
+        fab.visibility= View.VISIBLE
+
+        linearLayout = (activity as? AppCompatActivity)!!.findViewById(R.id.tvdeleteall)
+        linearLayout.visibility=View.GONE
+
+
+        mExplosionField = ExplosionField.attach2Window(activity as? AppCompatActivity)
+
 
         binding.mySwiperefresh.setOnRefreshListener {
             refresh()
             mySwiperefresh.setRefreshing(false)
+        }
+
+        fab.setOnClickListener { v: View? ->
+            recycler_view.smoothScrollToPosition(0)
         }
 
 
@@ -71,7 +100,13 @@ class FeedFragment : ScopedFragment(),KodeinAware {
 
         isConnected.observe(this@FeedFragment, Observer {
             if(it==true){
-                 binding.progressBar2.apply {
+                var toast: Toast
+
+                binding.progressBar2.apply {
+
+                    toast=Toasty.warning(view!!.context, getString(R.string.nointernet), Toast.LENGTH_LONG, true)
+                    toast.setGravity(Gravity.BOTTOM,0,150)
+                    toast.show()
                     visibility=View.GONE
                 }
             }
@@ -79,7 +114,7 @@ class FeedFragment : ScopedFragment(),KodeinAware {
 
         })
 
-        topHeadline.observe(this@FeedFragment, Observer {
+        topHeadline.observe(this@FeedFragment, Observer { it ->
 
             if(it == null || it.isEmpty()) return@Observer
             binding.progressBar2.apply {
@@ -95,7 +130,30 @@ class FeedFragment : ScopedFragment(),KodeinAware {
                     viewModel.onDetailNavigated()
 
                 }, ArchiveListener {
-                    viewModel.archive(it)
+                   // viewModel.archive(it)
+                    val article =it
+                    var toast: Toast
+
+
+                    MaterialDialog(view!!.context).show {
+                        title(R.string.warning)
+                        message(R.string.warningarchive)
+                        positiveButton(R.string.yes){
+                            mExplosionField.explode(it.view)
+                            viewModel.archive(article)
+                            toast=Toasty.success(view.context,  getString(R.string.archived), Toast.LENGTH_LONG, true)
+                            toast.setGravity(Gravity.BOTTOM,0,150)
+                            toast.show()
+                        }
+                        negativeButton(R.string.cancel){
+                            it.dismiss()
+                        }
+                    }
+
+                }, ShareListener {
+
+                    intentShareText(activity!!,getString(R.string.share_message,it.title, it.url ?: "" ))
+
 
                 },lifecycle,context)
                 adapter = topHeadlineAdapter
@@ -110,6 +168,22 @@ class FeedFragment : ScopedFragment(),KodeinAware {
         viewModel.fetchTopHeadline()
     }
 
+    private fun intentShareText(activity: Activity, text: String) {
+        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+            .setText(text)
+            .setType("text/plain")
+            .createChooserIntent()
+            .apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    // If we're on Lollipop, we can open the intent as a document
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                } else {
+                    // Else, we will use the old CLEAR_WHEN_TASK_RESET flag
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+                }
+            }
+        activity.startActivity(shareIntent)
+    }
 }
 
 

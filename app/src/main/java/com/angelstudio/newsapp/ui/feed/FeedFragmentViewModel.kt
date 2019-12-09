@@ -10,9 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class FeedFragmentViewModel(
-    private val topHeadlineRepository: TopHeadlineRepository
-) :ViewModel(){
+class FeedFragmentViewModel(private val topHeadlineRepository: TopHeadlineRepository) :ViewModel(){
 
     val topHeadline by lazyDeferred{
         topHeadlineRepository.getTopHeadline()

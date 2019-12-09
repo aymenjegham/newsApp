@@ -9,15 +9,15 @@
         
         <variable
                 name="clickListener"
-                type="com.angelstudio.newsapp.ui.feed.TopHeadlineListener"/>
+                type="com.angelstudio.newsapp.ui.archive.ArchiveListener"/>
 
         <variable
             name="archiveListener"
-            type="com.angelstudio.newsapp.ui.feed.ArchiveListener"/>
+            type="com.angelstudio.newsapp.ui.archive.ArchivearchiveListener"/>
 
         <variable
                 name="shareListener"
-                type="com.angelstudio.newsapp.ui.feed.ShareListener"/>
+                type="com.angelstudio.newsapp.ui.archive.ShareListener"/>
     </data>
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -76,19 +76,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/guideline"
                     app:title="@{article}" />
 
-            <TextView
-                    android:id="@+id/content"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:textAlignment="viewStart"
-                    android:theme="@style/Preference.desc"
-                    app:content="@{article}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/publishedAt" />
 
             <TextView
                     android:id="@+id/publishedAt"
@@ -102,19 +89,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     app:publishedAt="@{article}" />
 
-            <TextView
-                    android:id="@+id/author"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="start"
-                    android:theme="@style/datenauthor"
-                    app:author="@{article}"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/content" />
+
 
             <TextView
                     android:id="@+id/publishedAtDay"
@@ -137,9 +112,10 @@
                     android:layout_marginBottom="8dp"
                     android:contentDescription="@string/share_on_social_media"
                     android:onClick="@{() ->shareListener.onClick(article)}"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/content"
+                    app:layout_constraintTop_toBottomOf="@+id/publishedAtDay"
                     app:srcCompat="@drawable/ic_share" />
 
             <ImageView
@@ -152,9 +128,9 @@
                     android:onClick="@{() ->archiveListener.onClick(article)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView7"
-                    app:layout_constraintTop_toBottomOf="@+id/content"
+                    app:layout_constraintTop_toBottomOf="@+id/publishedAtDay"
 
-                    app:srcCompat="@drawable/ic_bookmark" />
+                    app:srcCompat="@drawable/ic_delete" />
 
             <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"

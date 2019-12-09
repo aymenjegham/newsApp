@@ -49,6 +49,16 @@ class TopHeadlineRepositoryImpl(
         }
     }
 
+    override suspend fun getArchive(): LiveData<List<Article>> {
+        return withContext(Dispatchers.IO){
+
+
+            return@withContext topHeadlineDao.getArchive()
+
+
+        }
+    }
+
     override suspend fun getConnectivity(): LiveData<Boolean> {
         return topHeadlineDataSource.connectivityState
     }
@@ -66,6 +76,27 @@ class TopHeadlineRepositoryImpl(
                         article.url,
                         article.urlToImage
                     ))
+    }
+
+
+
+    override suspend fun desarchive(article: Article) {
+        topHeadlineDao.desarchive(
+                        Archive(
+                        article.id,
+                        article.author,
+                        article.content,
+                        article.description,
+                        article.publishedAt,
+                        article.source,
+                        article.title,
+                        article.url,
+                        article.urlToImage
+        ))
+    }
+
+    override suspend fun deleteAll() {
+        topHeadlineDao.deleteAll()
     }
 
 

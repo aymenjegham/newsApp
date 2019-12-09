@@ -1,6 +1,6 @@
 package com.angelstudio.newsapp.data.network
 
-import android.util.Log
+ import com.angelstudio.newsapp.BuildConfig
 import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -13,7 +13,7 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 
-const val API_KEY = "627b1345f60d4335a9bcdd424a151fc2"
+const val API_KEY = BuildConfig.ApiKey
 
 
 interface NewsApiService {

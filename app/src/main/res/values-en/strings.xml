@@ -89,4 +89,23 @@
     <string name="this_app_is_">"This app is only made possible with the use of the News API. https://newsapi.org/ "
     </string>
     <string name="version">Version</string>
+    <string name="archive">Archive</string>
+    <string name="headline_item_image">Headline item image</string>
+    <string name="share_on_social_media">Share on social media</string>
+    <string name="source_image">source image</string>
+    <string name="bookmark_article">Bookmark article</string>
+    <string name="warningdesarchive">"You are about to drop this article from archive "</string>
+    <string name="warning">Warning</string>
+    <string name="agree">Agree</string>
+    <string name="disagree">Disagree</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="warningarchive">want to archive this article for later ?</string>
+    <string name="archived">Article is successfully archived!</string>
+    <string name="desarchived">Article is successfully droped from archive!</string>
+    <string name="nointernet">No internet connection!</string>
+    <string name="delete_all_archive">Delete all archive ?</string>
+    <string name="warning_delete_all">Are you sure you want to delete all your archive ?</string>
+    <string name="delete_all_success">"All archived articles are successfuly deleted "</string>
+
 </resources>

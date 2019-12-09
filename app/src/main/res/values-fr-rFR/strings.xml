@@ -90,4 +90,22 @@
         https://newsapi.org/
     </string>
     <string name="version">Version</string>
+    <string name="archive">Archive</string>
+    <string name="bookmark_article">Sauvegarder l\'article</string>
+    <string name="headline_item_image">"image d'article "</string>
+    <string name="share_on_social_media">partager sur les réseaux sociaux</string>
+    <string name="source_image">image</string>
+    <string name="warningdesarchive">Vous êtes sur le point de supprimer cet article des archives</string>
+    <string name="warning">Attention</string>
+    <string name="agree">D\'accord</string>
+    <string name="disagree">Annuler</string>
+    <string name="cancel">Annuler</string>
+    <string name="yes">Oui</string>
+    <string name="warningarchive">Voulez-vous archiver cet article? </string>
+    <string name="archived">L\'article est archivé avec succès!</string>
+    <string name="desarchived">L\'article est supprimé avec succès!</string>
+    <string name="nointernet">Pas de connexion Internet!</string>
+    <string name="delete_all_archive">Supprimer toutes les archives?</string>
+    <string name="warning_delete_all">Êtes-vous sûr de vouloir supprimer toutes vos archives?</string>
+    <string name="delete_all_success">Tous les articles archivés sont supprimés avec succès</string>
 </resources>
