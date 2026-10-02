@@ -22,7 +22,6 @@ class TopHeadlineDataSourceImpl(
         try {
             val fetchTopHeadline = newsApiService
                 .getTopHeadlines(category, country,pagesize)
-                .await()
             _downloadedTopHeadline.postValue(fetchTopHeadline)
             _connectivityState.postValue(false)
 

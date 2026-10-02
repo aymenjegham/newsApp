@@ -25,7 +25,7 @@ class FeedFragmentViewModel(private val topHeadlineRepository: TopHeadlineReposi
 
 
 
-    private val _navigateToDetail = MutableLiveData<String>()
+    private val _navigateToDetail = MutableLiveData<String?>()
     val navigateToDetail by lazyDeferred {
         _navigateToDetail
     }

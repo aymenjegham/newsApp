@@ -1,25 +1,22 @@
 package com.angelstudio.newsapp.ui.detail
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.transition.TransitionInflater
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
-import com.angelstudio.newsapp.databinding.FragmentDetailBinding
-import kotlinx.android.synthetic.main.fragment_detail.*
-import android.webkit.WebChromeClient
 import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.angelstudio.newsapp.R
+import com.angelstudio.newsapp.databinding.FragmentDetailBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.archive_fragment.*
+import es.dmoral.toasty.Toasty
 
 
 class DetailFragment : Fragment() {
@@ -29,8 +26,9 @@ class DetailFragment : Fragment() {
     }
 
     private lateinit var viewModel: DetailViewModel
-    private lateinit var binding : FragmentDetailBinding
-    private lateinit var myView :View
+    private var _binding: FragmentDetailBinding? = null
+    private val binding: FragmentDetailBinding
+        get() = _binding ?: error("DetailFragment binding is only valid between onCreateView and onDestroyView")
     private lateinit var fab: FloatingActionButton
     private lateinit var linearLayout: LinearLayout
 
@@ -39,12 +37,8 @@ class DetailFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-       // return inflater.inflate(R.layout.fragment_detail, container, false)
-
-        binding = DataBindingUtil.inflate(inflater , R.layout.fragment_detail,container , false)
-        myView= binding.root
-
-        return myView
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,7 +48,7 @@ class DetailFragment : Fragment() {
         val url = safeArgs?.urlArg
         val source = safeArgs?.source
 
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as? AppCompatActivity)?.supportActionBar?.title = source
@@ -66,33 +60,56 @@ class DetailFragment : Fragment() {
         linearLayout.visibility=View.GONE
 
         fab.setOnClickListener { v: View? ->
-            scrollviewdetail.scrollTo(0,0)
+            binding.scrollviewdetail.scrollTo(0,0)
         }
 
 
-        webview.setWebChromeClient(object : WebChromeClient() {
+        val webView = binding.webview
+        val progressBar = binding.progressBar
+        fun loadArticleUrl(target: WebView, articleUrl: String?) {
+            if (articleUrl != null && URLUtil.isValidUrl(articleUrl)) {
+                target.loadUrl(articleUrl)
+            } else {
+                progressBar.visibility = View.GONE
+                Toasty.error(target.context, "Invalid article URL", Toast.LENGTH_LONG, true).show()
+            }
+        }
+
+        webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView, progress: Int) {
-                binding.progressBar.setProgress(progress);
+                progressBar.progress = progress
 
             }
-        })
+        }
 
 
-        webview.settings.javaScriptEnabled = true
-        webview.webViewClient = object : WebViewClient() {
+        webView.settings.javaScriptEnabled = true
+        webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, _url: String?): Boolean {
-                view?.loadUrl(_url)
+                loadArticleUrl(view ?: webView, _url)
                 return true
             }
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                binding.progressBar.setVisibility(View.GONE);
+                progressBar.visibility = View.GONE
              }
         }
-        webview.loadUrl(url)
+        loadArticleUrl(webView, url)
 
 
     }
 
+    override fun onDestroyView() {
+        if (::fab.isInitialized) {
+            fab.setOnClickListener(null)
+        }
+        _binding?.webview?.apply {
+            stopLoading()
+            webChromeClient = null
+            webViewClient = WebViewClient()
+        }
+        _binding = null
+        super.onDestroyView()
+    }
 
 }

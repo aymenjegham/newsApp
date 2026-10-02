@@ -5,21 +5,26 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.angelstudio.newsapp.R
-import com.angelstudio.newsapp.generated.callback.OnClickListener
+import com.angelstudio.newsapp.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private val preferences: SharedPreferences
         get() = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
@@ -35,10 +40,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
-        fab = findViewById(R.id.floatingActionButton)
+        enableEdgeToEdge()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        applyWindowInsets()
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        fab = binding.floatingActionButton
         fab.alpha=(0.5f)
 
 
@@ -48,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         // Set up Action Bar
         navController = navHostFragment.navController
         // Setup bottom navigation view
-        bottom_nav.setupWithNavController(navController)
+        binding.bottomNav.setupWithNavController(navController)
         setupActionBarWithNavController(navController)
 
         val selectedTheme =preferences.getBoolean(this.getString(R.string.theme_setting),false)
@@ -58,6 +66,33 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_NO)
         }
 
+    }
+
+    private fun applyWindowInsets() {
+        val root = binding.root
+        val initialLeft = root.paddingLeft
+        val initialTop = root.paddingTop
+        val initialRight = root.paddingRight
+        val initialBottom = root.paddingBottom
+        val safeAreaTypes = WindowInsetsCompat.Type.systemBars() or
+            WindowInsetsCompat.Type.displayCutout()
+
+        ViewCompat.setOnApplyWindowInsetsListener(root) { view, insets ->
+            val safeArea = insets.getInsets(safeAreaTypes)
+            view.updatePadding(
+                left = initialLeft + safeArea.left,
+                top = initialTop + safeArea.top,
+                right = initialRight + safeArea.right,
+                bottom = initialBottom + safeArea.bottom
+            )
+            // The root owns these insets; Material children must not apply them again.
+            WindowInsetsCompat.Builder(insets)
+                .setInsets(safeAreaTypes, Insets.NONE)
+                .setInsetsIgnoringVisibility(safeAreaTypes, Insets.NONE)
+                .setDisplayCutout(null)
+                .build()
+        }
+        ViewCompat.requestApplyInsets(root)
     }
 
 
