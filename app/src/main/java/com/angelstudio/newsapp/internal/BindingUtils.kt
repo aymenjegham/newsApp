@@ -15,9 +15,9 @@ import com.bumptech.glide.request.target.Target
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.format.FormatStyle
-import org.threeten.bp.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.time.LocalDateTime
 
 
 
@@ -114,4 +114,3 @@ fun YouTubePlayerView.loadVideo(item: Article?) {
     }
 
 }
-

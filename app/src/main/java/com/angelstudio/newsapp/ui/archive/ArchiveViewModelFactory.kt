@@ -8,7 +8,7 @@ import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModel
 class ArchiveViewModelFactory(private val topHeadlineRepository: TopHeadlineRepository): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ArchiveViewModel(topHeadlineRepository) as T
     }
 }

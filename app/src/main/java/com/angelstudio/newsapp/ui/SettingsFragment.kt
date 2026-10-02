@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -16,22 +16,21 @@ import com.angelstudio.newsapp.R
 import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModel
 import com.angelstudio.newsapp.ui.feed.FeedFragmentViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
  import java.util.*
 
 
-class SettingsFragment : PreferenceFragmentCompat(), KodeinAware ,SharedPreferences.OnSharedPreferenceChangeListener{
+class SettingsFragment : PreferenceFragmentCompat(), DIAware, SharedPreferences.OnSharedPreferenceChangeListener{
 
 
 
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: FeedFragmentViewModelFactory by instance()
     private lateinit var viewModel: FeedFragmentViewModel
     private lateinit var fab: FloatingActionButton
@@ -46,7 +45,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware ,SharedPreferen
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(FeedFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[FeedFragmentViewModel::class.java]
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.Settings)
@@ -64,7 +63,7 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware ,SharedPreferen
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
         addPreferencesFromResource(R.xml.preferences)
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        requireNotNull(preferenceScreen.sharedPreferences).registerOnSharedPreferenceChangeListener(this)
 
 
         val country = this.findPreference<ListPreference>(getString(R.string.country_setting)) as ListPreference
@@ -164,5 +163,3 @@ class SettingsFragment : PreferenceFragmentCompat(), KodeinAware ,SharedPreferen
 
 
 }
-
-

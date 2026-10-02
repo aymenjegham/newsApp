@@ -14,9 +14,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.afollestad.materialdialogs.MaterialDialog
 import com.angelstudio.newsapp.R
@@ -24,23 +24,23 @@ import com.angelstudio.newsapp.databinding.ArchiveFragmentBinding
 import com.angelstudio.newsapp.ui.base.ScopedFragment
  import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.archive_fragment.*
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 import tyrantgit.explosionfield.ExplosionField
 
 
-class ArchiveFragment : ScopedFragment(),KodeinAware {
+class ArchiveFragment : ScopedFragment(), DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
 
     private val viewModelFactory: ArchiveViewModelFactory by instance()
     private lateinit var viewModel: ArchiveViewModel
     private lateinit var archiveAdapter: ArchiveAdapter
-    private lateinit var binding : ArchiveFragmentBinding
-    private lateinit var myView :View
+    private var _binding: ArchiveFragmentBinding? = null
+    private val binding: ArchiveFragmentBinding
+        get() = _binding ?: error("ArchiveFragment binding is only valid between onCreateView and onDestroyView")
     private lateinit var mExplosionField :ExplosionField
     private lateinit var fab: FloatingActionButton
     private lateinit var linearLayout: LinearLayout
@@ -50,10 +50,12 @@ class ArchiveFragment : ScopedFragment(),KodeinAware {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater , R.layout.archive_fragment,container , false)
-        myView= binding.root
+        _binding = ArchiveFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        bindUi()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.archive)
@@ -69,19 +71,20 @@ class ArchiveFragment : ScopedFragment(),KodeinAware {
 
         mExplosionField = ExplosionField.attach2Window(activity as? AppCompatActivity)
 
-        fab.setOnClickListener { v: View? ->
-            recycler_view_archive.smoothScrollToPosition(0)
+        fab.setOnClickListener {
+            binding.recyclerViewArchive.smoothScrollToPosition(0)
         }
 
         var toast: Toast
         tv.setOnClickListener { v:View? ->
-            MaterialDialog(view!!.context).show {
+            val dialogContext = binding.root.context
+            MaterialDialog(dialogContext).show {
                 title(R.string.warning)
                 message(R.string.warning_delete_all)
                 positiveButton(R.string.agree){
                     mExplosionField.explode(it.view)
                     viewModel.deleteAll()
-                    toast=Toasty.info(view.context, getString(R.string.delete_all_success), Toast.LENGTH_LONG, true)
+                    toast=Toasty.info(dialogContext, getString(R.string.delete_all_success), Toast.LENGTH_LONG, true)
                     toast.setGravity(Gravity.BOTTOM,0,150)
                     toast.show()
 
@@ -93,19 +96,18 @@ class ArchiveFragment : ScopedFragment(),KodeinAware {
             }        }
 
 
-        return myView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(ArchiveViewModel::class.java)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory)[ArchiveViewModel::class.java]
+        bindUi()
     }
 
-    private fun bindUi()=launch {
+    private fun bindUi() = viewLifecycleOwner.lifecycleScope.launch {
         val archivedArticles =viewModel.archivedArticles.await()
 
-        archivedArticles.observe(this@ArchiveFragment, Observer {
+        archivedArticles.observe(viewLifecycleOwner, Observer {
 
             if(it.isEmpty()){
                     linearLayout.visibility=View.GONE
@@ -123,21 +125,22 @@ class ArchiveFragment : ScopedFragment(),KodeinAware {
                         url,source ->  //viewModel.onTopHeadlineClicked(url)
 
                     val actionDetail = ArchiveFragmentDirections.actionArchiveFragmentToDetailFragment(url,source)
-                    Navigation.findNavController(view!!).navigate(actionDetail)
+                    Navigation.findNavController(binding.root).navigate(actionDetail)
 
 
                 }, ArchivearchiveListener {
                    // viewModel.desarchive(it)
                     val article =it
                     var toast: Toast
+                    val dialogContext = binding.root.context
 
-                    MaterialDialog(view!!.context).show {
+                    MaterialDialog(dialogContext).show {
                         title(R.string.warning)
                         message(R.string.warningdesarchive)
                         positiveButton(R.string.agree){
                             mExplosionField.explode(it.view)
                             viewModel.desarchive(article)
-                            toast=Toasty.info(view.context, getString(R.string.desarchived), Toast.LENGTH_LONG, true)
+                            toast=Toasty.info(dialogContext, getString(R.string.desarchived), Toast.LENGTH_LONG, true)
                             toast.setGravity(Gravity.BOTTOM,0,150)
                             toast.show()
 
@@ -152,13 +155,24 @@ class ArchiveFragment : ScopedFragment(),KodeinAware {
 
                     intentShareText(activity!!,getString(R.string.share_message,it.title, it.url ?: "" ))
 
-                },lifecycle,context)
+                },lifecycle,requireContext())
                 adapter = archiveAdapter
                 archiveAdapter.submitList(it)
 
             }
         })
 
+    }
+
+    override fun onDestroyView() {
+        if (::fab.isInitialized) {
+            fab.setOnClickListener(null)
+        }
+        if (::tv.isInitialized) {
+            tv.setOnClickListener(null)
+        }
+        _binding = null
+        super.onDestroyView()
     }
 
     private fun intentShareText(activity: Activity, text: String) {
