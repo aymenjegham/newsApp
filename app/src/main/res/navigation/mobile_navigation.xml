@@ -44,9 +44,19 @@
             android:id="@+id/settingsFragment"
             android:name="com.angelstudio.newsapp.ui.SettingsFragment"
             tools:layout="@xml/preferences">
-
-
+        <action
+                android:id="@+id/action_settingsFragment_to_contactFragment"
+                app:destination="@id/contactFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+            android:id="@+id/contactFragment"
+            android:name="com.angelstudio.newsapp.ui.ContactFragment"
+            android:label="@string/contact_us"
+            tools:layout="@layout/fragment_contact" />
     <fragment
             android:id="@+id/archiveFragment"
             android:name="com.angelstudio.newsapp.ui.archive.ArchiveFragment"

@@ -91,6 +91,15 @@
     <string name="_1_0" translatable="false">1.0</string>
      <string name="aymen_jegham" translatable="false">Aymen Jegham</string>
     <string name="contact">Contact</string>
+    <string name="contact_brand" translatable="false">Top News</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_description">If you have a question, suggestion, feedback, or need help with the Top News application, please contact us using the email address below.</string>
+    <string name="contact_email_label">Email</string>
+    <string name="contact_email_action">Email support</string>
+    <string name="contact_details_title">How we can help</string>
+    <string name="contact_details">Contact us for app support, feedback, suggestions, or privacy questions. To help us understand an issue, include your app version, device model, Android version, and a description of what happened. Do not include passwords or sensitive personal information.</string>
+    <string name="contact_support_note">This contact information is provided for questions and support related to Top News and its services.</string>
+    <string name="contact_no_email_app">No email app is installed. You can copy the email address on this page and contact us from your preferred email service.</string>
     <string name="jegham_aymen_89_gmail_com" translatable="false">jegham.aymen.89@gmail.com</string>
     <string name="this_app_is_">This app is only made possible with the use of the News API. https://newsapi.org/
     </string>

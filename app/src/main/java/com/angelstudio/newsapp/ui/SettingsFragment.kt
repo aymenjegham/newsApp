@@ -7,7 +7,10 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.doOnLayout
+import androidx.core.view.updatePadding
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -42,6 +45,16 @@ class SettingsFragment : PreferenceFragmentCompat(), DIAware, SharedPreferences.
 
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val list = listView
+        val initialBottomPadding = list.paddingBottom
+        list.clipToPadding = false
+        requireActivity().findViewById<View>(R.id.bottom_nav).doOnLayout { bottomNav ->
+            list.updatePadding(bottom = initialBottomPadding + bottomNav.height)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -63,6 +76,10 @@ class SettingsFragment : PreferenceFragmentCompat(), DIAware, SharedPreferences.
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
         addPreferencesFromResource(R.xml.preferences)
+        requireNotNull(findPreference<Preference>("contact")).setOnPreferenceClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_contactFragment)
+            true
+        }
         requireNotNull(preferenceScreen.sharedPreferences).registerOnSharedPreferenceChangeListener(this)
 
 
