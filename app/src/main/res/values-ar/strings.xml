@@ -108,4 +108,12 @@
     <string name="delete_all_success">تم حذف جميع المقالات المؤرشفة بنجاح</string>
 
 
+    <string name="contact_us">اتصل بنا</string>
+    <string name="contact_description">إذا كان لديك سؤال أو اقتراح أو ملاحظات، أو كنت بحاجة إلى مساعدة بشأن تطبيق Top News، يرجى التواصل معنا عبر عنوان البريد الإلكتروني أدناه.</string>
+    <string name="contact_email_label">البريد الإلكتروني</string>
+    <string name="contact_email_action">مراسلة الدعم</string>
+    <string name="contact_details_title">كيف يمكننا مساعدتك</string>
+    <string name="contact_details">تواصل معنا للحصول على الدعم أو لتقديم ملاحظات واقتراحات أو لطرح أسئلة حول الخصوصية. لمساعدتنا على فهم المشكلة، اذكر إصدار التطبيق وطراز جهازك وإصدار Android ووصف ما حدث. لا ترسل كلمات المرور أو المعلومات الشخصية الحساسة.</string>
+    <string name="contact_support_note">معلومات الاتصال هذه مخصصة للأسئلة وطلبات الدعم المتعلقة بتطبيق Top News وخدماته.</string>
+    <string name="contact_no_email_app">لا يوجد تطبيق بريد إلكتروني مثبت. يمكنك نسخ عنوان البريد الإلكتروني من هذه الصفحة والتواصل معنا عبر خدمة البريد الإلكتروني التي تفضلها.</string>
 </resources>

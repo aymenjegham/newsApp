@@ -8,6 +8,10 @@ Simple static website for the Top News Android application.
 - `contact.html` - Contact information
 - `privacy.html` - Privacy Policy
 
+The same contact information is available offline in the Android app under
+Settings -> About -> Contact Us. The page displays the support email address,
+support details, and an Email support button that opens an installed email app.
+
 ## GitHub Pages
 
 1. Create a public GitHub repository.
