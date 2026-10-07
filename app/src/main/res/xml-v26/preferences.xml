@@ -96,6 +96,11 @@
 
     </Preference>
     <Preference
+            android:key="contact"
+            android:title="@string/contact_us"
+            android:summary="@string/jegham_aymen_89_gmail_com"
+            android:icon="@drawable/ic_email"/>
+    <Preference
             android:enabled="false"
             android:layout="@layout/available_languages_layout"
             android:summary="@string/Select_language">
@@ -107,4 +112,3 @@
 
 
 </androidx.preference.PreferenceScreen>
-

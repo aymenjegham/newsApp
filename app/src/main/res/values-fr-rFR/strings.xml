@@ -108,4 +108,12 @@
     <string name="delete_all_archive">Supprimer toutes les archives?</string>
     <string name="warning_delete_all">Êtes-vous sûr de vouloir supprimer toutes vos archives?</string>
     <string name="delete_all_success">Tous les articles archivés sont supprimés avec succès</string>
+    <string name="contact_us">Contactez-nous</string>
+    <string name="contact_description">Pour toute question, suggestion, remarque ou demande d\'aide concernant l\'application Top News, contactez-nous à l\'adresse e-mail ci-dessous.</string>
+    <string name="contact_email_label">E-mail</string>
+    <string name="contact_email_action">Contacter l\'assistance</string>
+    <string name="contact_details_title">Comment nous pouvons vous aider</string>
+    <string name="contact_details">Contactez-nous pour obtenir de l\'aide, partager vos remarques ou suggestions, ou poser une question sur la confidentialité. Pour nous aider à comprendre un problème, indiquez la version de l\'application, le modèle de votre appareil, la version d\'Android et ce qui s\'est passé. Ne communiquez pas de mots de passe ni de données personnelles sensibles.</string>
+    <string name="contact_support_note">Ces coordonnées sont destinées aux questions et aux demandes d\'assistance concernant Top News et ses services.</string>
+    <string name="contact_no_email_app">Aucune application de messagerie n\'est installée. Vous pouvez copier l\'adresse e-mail affichée sur cette page et nous contacter depuis votre service de messagerie préféré.</string>
 </resources>
