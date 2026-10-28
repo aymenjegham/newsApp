@@ -1,31 +1,40 @@
 package com.angelstudio.newsapp.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.angelstudio.newsapp.data.db.entity.Archive
 import com.angelstudio.newsapp.data.db.entity.Article
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TopHeadlineDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(articles: List<Article>)
+    suspend fun insert(articles: List<Article>)
 
     @Query("select * from TopHeadline ")
-    fun getTopHeadline(): LiveData<List<Article>>
+    fun observeTopHeadlines(): Flow<List<Article>>
 
     @Query("delete from TopHeadline")
-    fun deleteOldTopHeadline()
+    suspend fun deleteOldTopHeadline()
+
+    @Transaction
+    suspend fun replaceTopHeadlines(articles: List<Article>) {
+        deleteOldTopHeadline()
+        if (articles.isNotEmpty()) insert(articles)
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun archive(archive: Archive)
+    suspend fun archive(archive: Archive)
 
-    @Delete
-    fun desarchive(archive: Archive)
+    @Query("DELETE FROM Archive WHERE url = :url")
+    suspend fun deleteSavedByUrl(url: String)
 
     @Query("select * from Archive ")
-    fun getArchive(): LiveData<List<Article>>
+    fun observeSavedArticles(): Flow<List<Archive>>
+
+    @Query("UPDATE Archive SET isRead = 1 WHERE url = :url")
+    suspend fun markSavedArticleRead(url: String)
 
     @Query("DELETE FROM Archive")
-    fun deleteAll()
+    suspend fun deleteAll()
 }

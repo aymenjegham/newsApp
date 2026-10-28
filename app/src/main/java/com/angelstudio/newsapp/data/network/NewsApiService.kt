@@ -16,10 +16,8 @@ const val API_KEY = BuildConfig.ApiKey
 
 interface NewsApiService {
 
-
     @GET("top-headlines")
     suspend fun getTopHeadlines(
-
         @Query("category") category:String,
         @Query("country") country:String,
         @Query("pagesize") pagesize :String

@@ -1,22 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00FFFFFF</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FCE4EC</color>
-    <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGrey">#CAC5C5</color>
     <color name="colorBlue">#3700B3</color>
-    <color name="colorBlack">#000000</color>
-    <color name="colorsub">#4103DAC6</color>
-    <color name="colorsubday">#867365</color>
-    <color name="colorsubday2">#4D4D4D</color>
-    <color name="colorsub2">#03738C</color>
-    <color name="colorsub3">#BF7582</color>
-    <color name="transparent">#00BF7582</color>
-
-
-
-
-
-
 </resources>
