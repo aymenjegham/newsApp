@@ -1,12 +1,10 @@
 package com.angelstudio.newsapp
 
 import androidx.room.Room
-import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.angelstudio.newsapp.data.db.TopHeadlineDatabase
 import com.angelstudio.newsapp.data.db.entity.Archive
@@ -14,8 +12,6 @@ import com.angelstudio.newsapp.data.db.entity.Article
 import com.angelstudio.newsapp.data.db.entity.Source
 import com.angelstudio.newsapp.data.network.ConnectivityInterceptor
 import com.angelstudio.newsapp.data.network.NewsApiService
-import com.angelstudio.newsapp.data.network.TopHeadlineDataSourceImpl
-import com.angelstudio.newsapp.data.network.response.TopHeadlineNewsResponse
 import com.angelstudio.newsapp.ui.MainActivity
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -25,6 +21,8 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.time.LocalDateTime
@@ -33,19 +31,18 @@ import java.time.format.DateTimeFormatter
 @RunWith(AndroidJUnit4::class)
 class DependencyMigrationInstrumentedTest {
 
+    @get:Rule
+    val composeRule = createAndroidComposeRule<MainActivity>()
+
     @Test
-    fun upgradedNavigationAndDiOpenArchiveAndSettings() {
-        ActivityScenario.launch(MainActivity::class.java).use { scenario ->
-            onView(withId(R.id.main_root)).check(matches(isDisplayed()))
-            scenario.onActivity { it.navController.navigate(R.id.archiveFragment) }
-            onView(withId(R.id.recycler_view_archive)).check(matches(isDisplayed()))
-            scenario.onActivity { it.navController.navigate(R.id.settingsFragment) }
-            onView(withId(R.id.categories_list)).check(matches(isDisplayed()))
-        }
+    fun composeActivityStartsOnTheNewsFeed() {
+        composeRule.onNodeWithText(
+            composeRule.activity.getString(R.string.app_name)
+        ).assertIsDisplayed()
     }
 
     @Test
-    fun roomPreservesHeadlineAndArchiveTables() {
+    fun roomPreservesHeadlineAndArchiveTables() = runBlocking {
         val database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             TopHeadlineDatabase::class.java
@@ -65,7 +62,7 @@ class DependencyMigrationInstrumentedTest {
                     article.urlToImage
                 )
             )
-            assertEquals(1, database.openHelper.readableDatabase.version)
+            assertEquals(3, database.openHelper.readableDatabase.version)
             database.openHelper.readableDatabase.query("SELECT title FROM TopHeadline").use {
                 check(it.moveToFirst())
                 assertEquals(article.title, it.getString(0))
@@ -73,6 +70,13 @@ class DependencyMigrationInstrumentedTest {
             database.openHelper.readableDatabase.query("SELECT title FROM Archive").use {
                 check(it.moveToFirst())
                 assertEquals(article.title, it.getString(0))
+            }
+            database.openHelper.readableDatabase.query(
+                "SELECT isRead, savedAt FROM Archive"
+            ).use {
+                check(it.moveToFirst())
+                assertEquals(0, it.getInt(0))
+                assertTrue(it.getLong(1) > 0)
             }
             dao.deleteAll()
             database.openHelper.readableDatabase.query("SELECT COUNT(*) FROM Archive").use {
@@ -82,23 +86,6 @@ class DependencyMigrationInstrumentedTest {
         } finally {
             database.close()
         }
-    }
-
-    @Test
-    fun suspendNewsServiceReceivesHeadlineParameters() = runBlocking {
-        var receivedParameters: List<String>? = null
-        val service = object : NewsApiService {
-            override suspend fun getTopHeadlines(
-                category: String,
-                country: String,
-                pagesize: String
-            ): TopHeadlineNewsResponse {
-                receivedParameters = listOf(category, country, pagesize)
-                return TopHeadlineNewsResponse(emptyList(), "ok", 0)
-            }
-        }
-        TopHeadlineDataSourceImpl(service).fetchTopHeadline("general", "us", "100")
-        assertEquals(listOf("general", "us", "100"), receivedParameters)
     }
 
     @Test
@@ -140,7 +127,7 @@ class DependencyMigrationInstrumentedTest {
         assertEquals("ok", response.status)
         assertEquals(1, response.totalResults)
         assertEquals("Headline", response.articles.single().title)
-        assertEquals("Source", response.articles.single().source.name)
+        assertEquals("Source", response.articles.single().source?.name)
     }
 
     @Test

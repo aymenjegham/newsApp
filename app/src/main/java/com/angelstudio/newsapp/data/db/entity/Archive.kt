@@ -16,5 +16,9 @@ data class Archive(
     val source: Source,
     val title: String?,
     val url: String?,
-    val urlToImage: String?
+    val urlToImage: String?,
+    @ColumnInfo(defaultValue = "0")
+    val isRead: Boolean = false,
+    @ColumnInfo(defaultValue = "0")
+    val savedAt: Long = System.currentTimeMillis()
 )

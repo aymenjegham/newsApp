@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">نيوز أب</string>
     <string name="business">اعمال</string>
-    <string name="Feed">"الأخبار "</string>
     <string name="country">بلد</string>
     <string name="entertainment">ترفيه</string>
     <string name="general">شامل</string>
@@ -12,18 +11,8 @@
     <string name="sports">رياضة</string>
     <string name="technology">تكنولوجيا</string>
     <string name="categories">التصنيفات</string>
-    <string name="Select_category">اختر تصنيف</string>
-    <string name="Select_country">اختر دولة</string>
-    <string name="Select_language">اختر لغة</string>
     <string name="Settings">ضبط</string>
     <string name="about">"في ما يخص التطبيقة "</string>
-    <string name="countries">بلدان</string>
-    <string name="alarms">"تذكير بالمستجدات "</string>
-    <string name="languages">اللغات</string>
-    <string name="night_mode">الوضع الليلي</string>
-    <string name="night_mode_off">إضغط لتحديد الوضع الليلي</string>
-    <string name="night_mode_on">إضغط لتحديد وضع اليوم</string>
-    <string name="theme">ديكور التطبيقة</string>
     <string name="ar">الأرجنتين</string>
     <string name="au">أستراليا</string>
     <string name="at">النمسا</string>
@@ -78,34 +67,10 @@
     <string name="us">الولايات المتحدة الأمريكية</string>
     <string name="ve">فنزويلا</string>
     <string name="za">جنوب أفريقيا</string>
-    <string name="Available_languages">هذا التطبيق متاح بثلاث لغات</string>
-    <string name="arabic_language">اللغة العربية</string>
-    <string name="author">مؤلف</string>
-    <string name="contact">اتصل</string>
-    <string name="contact_info">معلومات الاتصال</string>
-    <string name="flag_of_france">علم فرنسا</string>
-    <string name="flag_of_the_united_kingdom">علم المملكة المتحدة</string>
-    <string name="information_about_app_version">معلومات حول إصدار التطبيق</string>
-    <string name="this_app_is_">تم إجراء هذا التطبيق فقط باستخدام تطبيق News API. https://newsapi.org</string>
-    <string name="version">الإصدار</string>
-    <string name="archive">أرشيف</string>
-    <string name="headline_item_image">"صورة المقال "</string>
-    <string name="share_on_social_media">أنشر على وسائل الاعلام الاجتماعية</string>
-    <string name="source_image">صورة</string>
-    <string name="bookmark_article">"إحفظ المقال "</string>
-    <string name="warningdesarchive">أنت على وشك إسقاط هذه المقالة من الأرشيف</string>
-    <string name="warning">تحذير</string>
-    <string name="agree">"موافق "</string>
-    <string name="disagree">" غير موافق "</string>
     <string name="cancel">إلغاء</string>
     <string name="yes">نعم</string>
-    <string name="warningarchive">هل تريد أرشفة هذه المقالة ؟</string>
-    <string name="archived">تم أرشفة المقال بنجاح</string>
-    <string name="desarchived">تمت إزالة المقال بنجاح!</string>
-    <string name="nointernet">لا يوجد اتصال بالإنترنت!</string>
     <string name="delete_all_archive">حذف كل الأرشيف؟</string>
     <string name="warning_delete_all">هل أنت متأكد من أنك تريد حذف كل أرشيفك؟</string>
-    <string name="delete_all_success">تم حذف جميع المقالات المؤرشفة بنجاح</string>
 
 
     <string name="contact_us">اتصل بنا</string>
@@ -116,4 +81,6 @@
     <string name="contact_details">تواصل معنا للحصول على الدعم أو لتقديم ملاحظات واقتراحات أو لطرح أسئلة حول الخصوصية. لمساعدتنا على فهم المشكلة، اذكر إصدار التطبيق وطراز جهازك وإصدار Android ووصف ما حدث. لا ترسل كلمات المرور أو المعلومات الشخصية الحساسة.</string>
     <string name="contact_support_note">معلومات الاتصال هذه مخصصة للأسئلة وطلبات الدعم المتعلقة بتطبيق Top News وخدماته.</string>
     <string name="contact_no_email_app">لا يوجد تطبيق بريد إلكتروني مثبت. يمكنك نسخ عنوان البريد الإلكتروني من هذه الصفحة والتواصل معنا عبر خدمة البريد الإلكتروني التي تفضلها.</string>
+    <string name="contact_website">الموقع الإلكتروني والمعلومات القانونية</string>
+    <string name="contact_no_browser">لا يوجد متصفح مثبت. افتح الموقع باستخدام متصفحك المفضل.</string>
 </resources>

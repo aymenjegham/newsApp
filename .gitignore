@@ -1,14 +1,43 @@
-*.iml
-.gradle
-/local.properties
+# Build outputs and caches (including nested modules).
+.gradle/
+.kotlin/
+build/
+out/
+.externalNativeBuild/
+.cxx/
+captures/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+*.hprof
+
+# Local configuration.
+local.properties
 /gradle.properties
-/.idea/caches
-/.idea/libraries
+
+# Machine-specific IDE state; keep shared code styles and project settings.
+*.iml
+/.idea/caches/
+/.idea/libraries/
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/androidTestResultsUserPreferences.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/shelf/
+
+# Temporary tool reports, logs, and editor/OS leftovers.
+/.scratch/
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
 .DS_Store
-/build
-/captures
-.externalNativeBuild
+._*
+Thumbs.db
