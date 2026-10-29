@@ -1,21 +1,33 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Kotlinx Serialization
+-keepattributes *Annotation*,InnerClasses,Signature,EnclosingMethod
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-keepclassmembers class * {
+    @kotlinx.serialization.Serializable <fields>;
+}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keep,allowobfuscation @kotlinx.serialization.Serializable class * {
+    *;
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-keepclassmembers class * {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# Navigation 3 NavKey implementations (preserve class names for reflection via Class.forName in NavKeySerializer)
+-keep class * implements androidx.navigation3.runtime.NavKey {
+    <init>();
+    *;
+}
+
+# Room
+-keep class com.angelstudio.newsapp.data.db.** { *; }
+-keepclassmembers class com.angelstudio.newsapp.data.db.entity.** {
+    *;
+}
+
+# Gson / Retrofit models
+-keep class com.angelstudio.newsapp.data.network.response.** { *; }
+-keep class com.angelstudio.newsapp.domain.model.** { *; }
+
+# Preserve line numbers and source files for stack traces debugging
+-keepattributes SourceFile,LineNumberTable
